@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "slug": "openai-releases-gpt-5-with-native-reasoning-mode",
+    "tag": "AI",
+    "date": "FEB 24",
+    "title": "OpenAI Releases GPT-5 with Native Reasoning Mode",
+    "domain": "openai.com",
+    "excerpt": "OpenAI has launched GPT-5, featuring a built-in chain-of-thought reasoning mode that can be toggled via API. Early benchmarks show a 40% improvement in math and coding tasks compared to GPT-4o.",
+    "votes": 1284,
+    "comments": 156,
+    "readTime": 6,
+    "featured": true,
+    "snippets": [
+      {
+        "lang": "javascript",
+        "code": "const gpt5 = await openai.models.create({\n  model: \"gpt-5-reasoning\",\n  reasoning_effort: \"high\",\n  prompt: \"Solve the Riemann Hypothesis\"\n});"
+      },
+      {
+        "lang": "python",
+        "code": "completion = client.chat.completions.create(\n    model=\"gpt-5-reasoning\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Solve the Riemann Hypothesis\"}\n    ],\n    reasoning_effort=\"high\"\n)"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "bun-2-0-now-with-full-windows-support-and-compiled-binaries",
+    "tag": "DEV",
+    "date": "FEB 24",
+    "title": "Bun 2.0: Now with Full Windows Support and Compiled Binaries",
+    "domain": "bun.sh",
+    "excerpt": "The fast JavaScript runtime Bun has reached version 2.0. This release brings stable performance on Windows and a new capability to compile TypeScript scripts into standalone executables.",
+    "votes": 850,
+    "comments": 42,
+    "readTime": 4,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "bash",
+        "code": "bun build ./index.ts --compile --outfile my-app.exe"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "github-actions-adds-managed-gpu-runners-for-ml-workflows",
+    "tag": "DEVOPS",
+    "date": "FEB 23",
+    "title": "GitHub Actions adds Managed GPU Runners for ML Workflows",
+    "domain": "github.com",
+    "excerpt": "GitHub is making it easier to run large language models and other ML tasks by introducing managed GPU runners for Actions, eliminating the need for self-hosted infrastructure.",
+    "votes": 620,
+    "comments": 28,
+    "readTime": 5,
+    "featured": false
+  },
+  {
+    "id": 4,
+    "slug": "critical-rce-found-in-popular-npm-package-request-utils",
+    "tag": "SECURITY",
+    "date": "FEB 23",
+    "title": "Critical RCE Found in Popular npm Package 'request-utils'",
+    "domain": "snyk.io",
+    "excerpt": "A high-severity remote code execution vulnerability has been discovered in a utility package with over 2M weekly downloads. Users are urged to patch to v4.2.1 immediately.",
+    "votes": 410,
+    "comments": 92,
+    "readTime": 3,
+    "featured": false
+  },
+  {
+    "id": 5,
+    "slug": "figma-variables-advanced-logic-and-theming-guide",
+    "tag": "DESIGN",
+    "date": "FEB 22",
+    "title": "Figma Variables: Advanced Logic and Theming Guide",
+    "domain": "figma.com",
+    "excerpt": "Deep dive into using Figma's newest variable types for complex UI state management, multi-mode theming, and automated design handoff workflows.",
+    "votes": 320,
+    "comments": 12,
+    "readTime": 8,
+    "featured": false
+  },
+  {
+    "id": 6,
+    "slug": "cloudflare-workers-now-supports-python-beta",
+    "tag": "INFRA",
+    "date": "FEB 22",
+    "title": "Cloudflare Workers Now Supports Python (Beta)",
+    "domain": "cloudflare.com",
+    "excerpt": "Cloudflare has announced first-class support for Python in Workers, compiled to WebAssembly using the Pyodide runtime, enabling data science at the edge.",
+    "votes": 980,
+    "comments": 64,
+    "readTime": 5,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "python",
+        "code": "from js import Response\n\ndef fetch(request):\n    return Response.new(\"Hello from Python at the edge!\")"
+      }
+    ]
+  }
+]
