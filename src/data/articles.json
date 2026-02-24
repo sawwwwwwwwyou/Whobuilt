@@ -110,7 +110,7 @@
     "votes": 1450,
     "comments": 78,
     "readTime": 5,
-    "featured": true,
+    "featured": false,
     "snippets": [
       {
         "lang": "python",
@@ -142,6 +142,52 @@
       {
         "lang": "css",
         "code": "@theme {\n  --color-brand: #D16B4D;\n}"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "fallas-valencia-2026-survival-guide",
+    "tag": "TRAVEL",
+    "date": "FEB 24",
+    "title": "Fallas Valencia 2026 Survival Guide: 15 Tips You Actually Need",
+    "domain": "whobuilt.app",
+    "excerpt": "Las Fallas is five days of controlled chaos across an entire city — 750+ burning monuments, daily gunpowder explosions, 2M visitors. This guide covers the practical things that will make or break your experience.",
+    "votes": 2140,
+    "comments": 230,
+    "readTime": 8,
+    "featured": true,
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "WHAT TO PACK:\n\n1. Earplugs — La Mascleta is painfully loud\n2. Comfortable walking shoes — 12-18 km/day\n3. Portable battery pack — your phone will die\n4. Light layers — 12-20°C in March\n5. Small daypack — water, battery, snacks\n\nKEY DATES:\n15-19 March: Main festival\n18 March: La Ofrenda (flower procession)\n19 March: La Crema (all monuments burn)"
+      },
+      {
+        "lang": "español",
+        "code": "QUÉ LLEVAR:\n\n1. Tapones para los oídos — La Mascleta duele\n2. Calzado cómodo — 12-18 km al día\n3. Batería portátil — tu móvil va a morir\n4. Capas ligeras — 12-20°C en marzo\n5. Mochila pequeña — agua, batería, comida\n\nFECHAS CLAVE:\n15-19 marzo: Festival principal\n18 marzo: La Ofrenda (procesión de flores)\n19 marzo: La Crema (se queman todos los monumentos)"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "best-apps-for-las-fallas-2026",
+    "tag": "TRAVEL",
+    "date": "FEB 24",
+    "title": "Best Apps for Las Fallas 2026: Which One Should You Download?",
+    "domain": "whobuilt.app",
+    "excerpt": "Over 750 fallas monuments, a city-wide festival, and millions of visitors. You need the right app. This guide compares your realistic options and explains which Fallas map app is worth installing.",
+    "votes": 1380,
+    "comments": 95,
+    "readTime": 5,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "MIS FALLAS APP — WHAT IT COVERS:\n\n✓ 750+ monuments on interactive Mapbox map\n✓ 8 category filters (Especial, Infantil, etc.)\n✓ Full event calendar grouped by date\n✓ Walking directions to any monument\n✓ Works offline (cached map tiles)\n✓ No login required\n✓ EN / ES / Valencian\n✓ Free on iOS"
+      },
+      {
+        "lang": "español",
+        "code": "APP MIS FALLAS — QUÉ INCLUYE:\n\n✓ 750+ monumentos en mapa Mapbox interactivo\n✓ 8 filtros de categoría (Especial, Infantil...)\n✓ Calendario completo de eventos por fecha\n✓ Rutas a pie hasta cualquier monumento\n✓ Funciona sin cobertura (tiles cacheados)\n✓ Sin registro necesario\n✓ ES / EN / Valenciano\n✓ Gratis en iOS"
       }
     ]
   }
