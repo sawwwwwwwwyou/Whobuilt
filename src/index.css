@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-  --c-accent: #2D4AB1;
-  --c-bg-canvas: #E0E4EB;
+  --c-accent: #D16B4D;
+  /* Terracotta/Red-Orange */
+  --c-accent-alt: #F5B942;
+  /* Warm Yellow */
+  --c-bg-canvas: #F2F0E9;
+  /* Paper/Beige canvas */
   --c-bg-card: #FFFFFF;
-  --c-ink: #001A41;
-  --c-border: #001A41;
+  /* High contrast white cards */
+  --c-ink: #2B2B2B;
+  /* Deep charcoal ink */
+  --c-border: #2B2B2B;
 
   --f-mono: 'Space Mono', monospace;
   --f-display: 'JetBrains Mono', monospace;
