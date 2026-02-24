@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "slug": "openai-releases-gpt-5-with-native-reasoning-mode",
+    "tag": "AI",
+    "date": "FEB 24",
+    "title": "OpenAI Releases GPT-5 with Native Reasoning Mode",
+    "domain": "openai.com",
+    "excerpt": "OpenAI has launched GPT-5, featuring a built-in chain-of-thought reasoning mode that can be toggled via API. Early benchmarks show a 40% improvement in math and coding tasks compared to GPT-4o.",
+    "votes": 1284,
+    "comments": 156,
+    "readTime": 6,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "javascript",
+        "code": "const gpt5 = await openai.models.create({\n  model: \"gpt-5-reasoning\",\n  reasoning_effort: \"high\",\n  prompt: \"Solve the Riemann Hypothesis\"\n});"
+      },
+      {
+        "lang": "python",
+        "code": "completion = client.chat.completions.create(\n    model=\"gpt-5-reasoning\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Solve the Riemann Hypothesis\"}\n    ],\n    reasoning_effort=\"high\"\n)"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "bun-2-0-now-with-full-windows-support-and-compiled-binaries",
+    "tag": "DEV",
+    "date": "FEB 24",
+    "title": "Bun 2.0: Now with Full Windows Support and Compiled Binaries",
+    "domain": "bun.sh",
+    "excerpt": "The fast JavaScript runtime Bun has reached version 2.0. This release brings stable performance on Windows and a new capability to compile TypeScript scripts into standalone executables.",
+    "votes": 850,
+    "comments": 42,
+    "readTime": 4,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "bash",
+        "code": "bun build ./index.ts --compile --outfile my-app.exe"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "github-actions-adds-managed-gpu-runners-for-ml-workflows",
+    "tag": "DEVOPS",
+    "date": "FEB 23",
+    "title": "GitHub Actions adds Managed GPU Runners for ML Workflows",
+    "domain": "github.com",
+    "excerpt": "GitHub is making it easier to run large language models and other ML tasks by introducing managed GPU runners for Actions, eliminating the need for self-hosted infrastructure.",
+    "votes": 620,
+    "comments": 28,
+    "readTime": 5,
+    "featured": false
+  },
+  {
+    "id": 4,
+    "slug": "critical-rce-found-in-popular-npm-package-request-utils",
+    "tag": "SECURITY",
+    "date": "FEB 23",
+    "title": "Critical RCE Found in Popular npm Package 'request-utils'",
+    "domain": "snyk.io",
+    "excerpt": "A high-severity remote code execution vulnerability has been discovered in a utility package with over 2M weekly downloads. Users are urged to patch to v4.2.1 immediately.",
+    "votes": 410,
+    "comments": 92,
+    "readTime": 3,
+    "featured": false
+  },
+  {
+    "id": 5,
+    "slug": "figma-variables-advanced-logic-and-theming-guide",
+    "tag": "DESIGN",
+    "date": "FEB 22",
+    "title": "Figma Variables: Advanced Logic and Theming Guide",
+    "domain": "figma.com",
+    "excerpt": "Deep dive into using Figma's newest variable types for complex UI state management, multi-mode theming, and automated design handoff workflows.",
+    "votes": 320,
+    "comments": 12,
+    "readTime": 8,
+    "featured": false
+  },
+  {
+    "id": 6,
+    "slug": "cloudflare-workers-now-supports-python-beta",
+    "tag": "INFRA",
+    "date": "FEB 22",
+    "title": "Cloudflare Workers Now Supports Python (Beta)",
+    "domain": "cloudflare.com",
+    "excerpt": "Cloudflare has announced first-class support for Python in Workers, compiled to WebAssembly using the Pyodide runtime, enabling data science at the edge.",
+    "votes": 980,
+    "comments": 64,
+    "readTime": 5,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "python",
+        "code": "from js import Response\n\ndef fetch(request):\n    return Response.new(\"Hello from Python at the edge!\")"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "pydantic-v2-10-new-validation-engine-and-performance-boost",
+    "tag": "DEV",
+    "date": "FEB 25",
+    "title": "Pydantic v2.10: New Validation Engine and Performance Boost",
+    "domain": "pydantic.dev",
+    "excerpt": "Pydantic has released v2.10, featuring a completely rewritten validation engine in Rust. This version offers up to 2x speedup for complex nested models and improved error reporting.",
+    "votes": 1450,
+    "comments": 78,
+    "readTime": 5,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "python",
+        "code": "from pydantic import BaseModel\n\nclass User(BaseModel):\n    id: int\n    name: str = \"John Doe\""
+      },
+      {
+        "lang": "javascript",
+        "code": "// Pydantic validation is used in Python backends\n// but you can define matching TypeScript interfaces:\ninterface User {\n    id: number;\n    name: string;\n}"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "tailwind-css-v4-0-alpha-faster-engine-and-new-oxide-compiler",
+    "tag": "DESIGN",
+    "date": "FEB 25",
+    "title": "Tailwind CSS v4.0 Alpha: Faster Engine and New Oxide Compiler",
+    "domain": "tailwindcss.com",
+    "excerpt": "The Tailwind team has unveiled the alpha version of v4.0. It's powered by 'Oxide', a new high-performance compiler written in Rust that is 10x faster than the current JIT engine.",
+    "votes": 920,
+    "comments": 34,
+    "readTime": 4,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "bash",
+        "code": "npm install tailwindcss@next"
+      },
+      {
+        "lang": "css",
+        "code": "@theme {\n  --color-brand: #D16B4D;\n}"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "fallas-valencia-2026-survival-guide",
+    "tag": "TRAVEL",
+    "date": "FEB 24",
+    "title": "Fallas Valencia 2026 Survival Guide: 15 Tips You Actually Need",
+    "domain": "whobuilt.app",
+    "excerpt": "Las Fallas is five days of controlled chaos across an entire city — 750+ burning monuments, daily gunpowder explosions, 2M visitors. This guide covers the practical things that will make or break your experience.",
+    "votes": 2140,
+    "comments": 230,
+    "readTime": 8,
+    "featured": true,
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "WHAT TO PACK:\n\n1. Earplugs — La Mascleta is painfully loud\n2. Comfortable walking shoes — 12-18 km/day\n3. Portable battery pack — your phone will die\n4. Light layers — 12-20°C in March\n5. Small daypack — water, battery, snacks\n\nKEY DATES:\n15-19 March: Main festival\n18 March: La Ofrenda (flower procession)\n19 March: La Crema (all monuments burn)"
+      },
+      {
+        "lang": "español",
+        "code": "QUÉ LLEVAR:\n\n1. Tapones para los oídos — La Mascleta duele\n2. Calzado cómodo — 12-18 km al día\n3. Batería portátil — tu móvil va a morir\n4. Capas ligeras — 12-20°C en marzo\n5. Mochila pequeña — agua, batería, comida\n\nFECHAS CLAVE:\n15-19 marzo: Festival principal\n18 marzo: La Ofrenda (procesión de flores)\n19 marzo: La Crema (se queman todos los monumentos)"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "best-apps-for-las-fallas-2026",
+    "tag": "TRAVEL",
+    "date": "FEB 24",
+    "title": "Best Apps for Las Fallas 2026: Which One Should You Download?",
+    "domain": "whobuilt.app",
+    "excerpt": "Over 750 fallas monuments, a city-wide festival, and millions of visitors. You need the right app. This guide compares your realistic options and explains which Fallas map app is worth installing.",
+    "votes": 1380,
+    "comments": 95,
+    "readTime": 5,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "MIS FALLAS APP — WHAT IT COVERS:\n\n✓ 750+ monuments on interactive Mapbox map\n✓ 8 category filters (Especial, Infantil, etc.)\n✓ Full event calendar grouped by date\n✓ Walking directions to any monument\n✓ Works offline (cached map tiles)\n✓ No login required\n✓ EN / ES / Valencian\n✓ Free on iOS"
+      },
+      {
+        "lang": "español",
+        "code": "APP MIS FALLAS — QUÉ INCLUYE:\n\n✓ 750+ monumentos en mapa Mapbox interactivo\n✓ 8 filtros de categoría (Especial, Infantil...)\n✓ Calendario completo de eventos por fecha\n✓ Rutas a pie hasta cualquier monumento\n✓ Funciona sin cobertura (tiles cacheados)\n✓ Sin registro necesario\n✓ ES / EN / Valenciano\n✓ Gratis en iOS"
+      }
+    ]
+  }
+]
