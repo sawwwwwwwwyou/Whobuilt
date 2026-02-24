@@ -10,7 +10,7 @@
     "votes": 1284,
     "comments": 156,
     "readTime": 6,
-    "featured": true,
+    "featured": false,
     "snippets": [
       {
         "lang": "javascript",
@@ -96,6 +96,52 @@
       {
         "lang": "python",
         "code": "from js import Response\n\ndef fetch(request):\n    return Response.new(\"Hello from Python at the edge!\")"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "pydantic-v2-10-new-validation-engine-and-performance-boost",
+    "tag": "DEV",
+    "date": "FEB 25",
+    "title": "Pydantic v2.10: New Validation Engine and Performance Boost",
+    "domain": "pydantic.dev",
+    "excerpt": "Pydantic has released v2.10, featuring a completely rewritten validation engine in Rust. This version offers up to 2x speedup for complex nested models and improved error reporting.",
+    "votes": 1450,
+    "comments": 78,
+    "readTime": 5,
+    "featured": true,
+    "snippets": [
+      {
+        "lang": "python",
+        "code": "from pydantic import BaseModel\n\nclass User(BaseModel):\n    id: int\n    name: str = \"John Doe\""
+      },
+      {
+        "lang": "javascript",
+        "code": "// Pydantic validation is used in Python backends\n// but you can define matching TypeScript interfaces:\ninterface User {\n    id: number;\n    name: string;\n}"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "tailwind-css-v4-0-alpha-faster-engine-and-new-oxide-compiler",
+    "tag": "DESIGN",
+    "date": "FEB 25",
+    "title": "Tailwind CSS v4.0 Alpha: Faster Engine and New Oxide Compiler",
+    "domain": "tailwindcss.com",
+    "excerpt": "The Tailwind team has unveiled the alpha version of v4.0. It's powered by 'Oxide', a new high-performance compiler written in Rust that is 10x faster than the current JIT engine.",
+    "votes": 920,
+    "comments": 34,
+    "readTime": 4,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "bash",
+        "code": "npm install tailwindcss@next"
+      },
+      {
+        "lang": "css",
+        "code": "@theme {\n  --color-brand: #D16B4D;\n}"
       }
     ]
   }
