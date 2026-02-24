@@ -7,6 +7,14 @@ const sideArticles = articles.filter(a => !a.featured);
 const FILTERS = ['POPULAR', 'NEWEST', 'RISING'];
 
 export function ArticleList({ tagFilter, sortFilter, setSortFilter }) {
+    const [votedArticles, setVotedArticles] = useState({});
+
+    const handleVote = (e, articleId) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setVotedArticles(prev => ({ ...prev, [articleId]: true }));
+    };
+
     const filtered = articles.filter(a => {
         if (tagFilter && a.tag !== tagFilter) return false;
         return !a.featured;
@@ -69,9 +77,13 @@ export function ArticleList({ tagFilter, sortFilter, setSortFilter }) {
                             </div>
                         </div>
                         <div className="vote-col">
-                            <button className="vote-btn" onClick={(e) => e.preventDefault()}>
+                            <button
+                                className="vote-btn"
+                                onClick={(e) => handleVote(e, article.id)}
+                                style={{ color: votedArticles[article.id] ? 'var(--c-accent)' : 'inherit' }}
+                            >
                                 <span className="vote-icon">▲</span>
-                                <span className="vote-count">{article.votes}</span>
+                                <span className="vote-count">{article.votes + (votedArticles[article.id] ? 1 : 0)}</span>
                             </button>
                             <div className="comment-link">{article.comments} CMT</div>
                         </div>

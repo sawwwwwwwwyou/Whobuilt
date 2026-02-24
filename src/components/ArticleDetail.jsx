@@ -10,6 +10,7 @@ export function ArticleDetail() {
     const article = articles.find(a => a.slug === slug);
     const [activeSnippetIdx, setActiveSnippetIdx] = useState(0);
     const [activeLang, setActiveLang] = useState('en');
+    const [hasVoted, setHasVoted] = useState(false);
 
     if (!article) {
         return (
@@ -136,13 +137,21 @@ export function ArticleDetail() {
                     </div>
                 </div>
                 <div className="vote-col" style={{ flexDirection: 'row', borderLeft: 'none', borderTop: 'var(--b-width) solid var(--c-border)' }}>
-                    <button className="vote-btn" style={{ flexDirection: 'row', gap: '12px', padding: '16px', flex: 1 }}>
+                    <button
+                        className="vote-btn"
+                        onClick={() => setHasVoted(true)}
+                        style={{ flexDirection: 'row', gap: '12px', padding: '16px', flex: 1, color: hasVoted ? 'var(--c-accent)' : 'inherit' }}
+                    >
                         <span className="vote-icon" style={{ marginBottom: 0 }}>▲</span>
-                        <span className="vote-count">{article.votes} UPVOTES</span>
+                        <span className="vote-count">{article.votes + (hasVoted ? 1 : 0)} {hasVoted ? 'VOTED' : 'UPVOTES'}</span>
                     </button>
-                    <div className="comment-link" style={{ display: 'flex', alignItems: 'center', padding: '0 24px', borderLeft: 'var(--b-width) solid var(--c-border)', borderTop: 'none', whiteSpace: 'nowrap' }}>
+                    <button
+                        className="comment-link"
+                        onClick={() => alert(`Comments section for "${article.title}" is currently read-only. We are moving to a new discussion platform soon!`)}
+                        style={{ background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '0 24px', borderLeft: 'var(--b-width) solid var(--c-border)', borderTop: 'none', borderRight: 'none', borderBottom: 'none', whiteSpace: 'nowrap', color: 'inherit', fontFamily: 'inherit' }}
+                    >
                         {article.comments} COMMENTS
-                    </div>
+                    </button>
                 </div>
             </article>
         </div>
