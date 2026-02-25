@@ -1,151 +1,5 @@
 [
   {
-    "id": 1,
-    "slug": "openai-releases-gpt-5-with-native-reasoning-mode",
-    "tag": "AI",
-    "date": "FEB 24",
-    "title": "OpenAI Releases GPT-5 with Native Reasoning Mode",
-    "domain": "openai.com",
-    "excerpt": "OpenAI has launched GPT-5, featuring a built-in chain-of-thought reasoning mode that can be toggled via API. Early benchmarks show a 40% improvement in math and coding tasks compared to GPT-4o.",
-    "votes": 1284,
-    "comments": 156,
-    "readTime": 6,
-    "featured": false,
-    "snippets": [
-      {
-        "lang": "javascript",
-        "code": "const gpt5 = await openai.models.create({\n  model: \"gpt-5-reasoning\",\n  reasoning_effort: \"high\",\n  prompt: \"Solve the Riemann Hypothesis\"\n});"
-      },
-      {
-        "lang": "python",
-        "code": "completion = client.chat.completions.create(\n    model=\"gpt-5-reasoning\",\n    messages=[\n        {\"role\": \"user\", \"content\": \"Solve the Riemann Hypothesis\"}\n    ],\n    reasoning_effort=\"high\"\n)"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "slug": "bun-2-0-now-with-full-windows-support-and-compiled-binaries",
-    "tag": "DEV",
-    "date": "FEB 24",
-    "title": "Bun 2.0: Now with Full Windows Support and Compiled Binaries",
-    "domain": "bun.sh",
-    "excerpt": "The fast JavaScript runtime Bun has reached version 2.0. This release brings stable performance on Windows and a new capability to compile TypeScript scripts into standalone executables.",
-    "votes": 850,
-    "comments": 42,
-    "readTime": 4,
-    "featured": false,
-    "snippets": [
-      {
-        "lang": "bash",
-        "code": "bun build ./index.ts --compile --outfile my-app.exe"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "slug": "github-actions-adds-managed-gpu-runners-for-ml-workflows",
-    "tag": "DEVOPS",
-    "date": "FEB 23",
-    "title": "GitHub Actions adds Managed GPU Runners for ML Workflows",
-    "domain": "github.com",
-    "excerpt": "GitHub is making it easier to run large language models and other ML tasks by introducing managed GPU runners for Actions, eliminating the need for self-hosted infrastructure.",
-    "votes": 620,
-    "comments": 28,
-    "readTime": 5,
-    "featured": false
-  },
-  {
-    "id": 4,
-    "slug": "critical-rce-found-in-popular-npm-package-request-utils",
-    "tag": "SECURITY",
-    "date": "FEB 23",
-    "title": "Critical RCE Found in Popular npm Package 'request-utils'",
-    "domain": "snyk.io",
-    "excerpt": "A high-severity remote code execution vulnerability has been discovered in a utility package with over 2M weekly downloads. Users are urged to patch to v4.2.1 immediately.",
-    "votes": 410,
-    "comments": 92,
-    "readTime": 3,
-    "featured": false
-  },
-  {
-    "id": 5,
-    "slug": "figma-variables-advanced-logic-and-theming-guide",
-    "tag": "DESIGN",
-    "date": "FEB 22",
-    "title": "Figma Variables: Advanced Logic and Theming Guide",
-    "domain": "figma.com",
-    "excerpt": "Deep dive into using Figma's newest variable types for complex UI state management, multi-mode theming, and automated design handoff workflows.",
-    "votes": 320,
-    "comments": 12,
-    "readTime": 8,
-    "featured": false
-  },
-  {
-    "id": 6,
-    "slug": "cloudflare-workers-now-supports-python-beta",
-    "tag": "INFRA",
-    "date": "FEB 22",
-    "title": "Cloudflare Workers Now Supports Python (Beta)",
-    "domain": "cloudflare.com",
-    "excerpt": "Cloudflare has announced first-class support for Python in Workers, compiled to WebAssembly using the Pyodide runtime, enabling data science at the edge.",
-    "votes": 980,
-    "comments": 64,
-    "readTime": 5,
-    "featured": false,
-    "snippets": [
-      {
-        "lang": "python",
-        "code": "from js import Response\n\ndef fetch(request):\n    return Response.new(\"Hello from Python at the edge!\")"
-      }
-    ]
-  },
-  {
-    "id": 7,
-    "slug": "pydantic-v2-10-new-validation-engine-and-performance-boost",
-    "tag": "DEV",
-    "date": "FEB 25",
-    "title": "Pydantic v2.10: New Validation Engine and Performance Boost",
-    "domain": "pydantic.dev",
-    "excerpt": "Pydantic has released v2.10, featuring a completely rewritten validation engine in Rust. This version offers up to 2x speedup for complex nested models and improved error reporting.",
-    "votes": 1450,
-    "comments": 78,
-    "readTime": 5,
-    "featured": false,
-    "snippets": [
-      {
-        "lang": "python",
-        "code": "from pydantic import BaseModel\n\nclass User(BaseModel):\n    id: int\n    name: str = \"John Doe\""
-      },
-      {
-        "lang": "javascript",
-        "code": "// Pydantic validation is used in Python backends\n// but you can define matching TypeScript interfaces:\ninterface User {\n    id: number;\n    name: string;\n}"
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "slug": "tailwind-css-v4-0-alpha-faster-engine-and-new-oxide-compiler",
-    "tag": "DESIGN",
-    "date": "FEB 25",
-    "title": "Tailwind CSS v4.0 Alpha: Faster Engine and New Oxide Compiler",
-    "domain": "tailwindcss.com",
-    "excerpt": "The Tailwind team has unveiled the alpha version of v4.0. It's powered by 'Oxide', a new high-performance compiler written in Rust that is 10x faster than the current JIT engine.",
-    "votes": 920,
-    "comments": 34,
-    "readTime": 4,
-    "featured": false,
-    "snippets": [
-      {
-        "lang": "bash",
-        "code": "npm install tailwindcss@next"
-      },
-      {
-        "lang": "css",
-        "code": "@theme {\n  --color-brand: #D16B4D;\n}"
-      }
-    ]
-  },
-  {
     "id": 9,
     "slug": "fallas-valencia-2026-survival-guide",
     "tag": "TRAVEL",
@@ -188,6 +42,63 @@
       {
         "lang": "español",
         "code": "APP MIS FALLAS — QUÉ INCLUYE:\n\n✓ 750+ monumentos en mapa Mapbox interactivo\n✓ 8 filtros de categoría (Especial, Infantil...)\n✓ Calendario completo de eventos por fecha\n✓ Rutas a pie hasta cualquier monumento\n✓ Funciona sin cobertura (tiles cacheados)\n✓ Sin registro necesario\n✓ ES / EN / Valenciano\n✓ Gratis en iOS"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "dog-vibe-codes-games-with-ai",
+    "tag": "AI",
+    "date": "FEB 25",
+    "title": "This Developer's Dog Is Now a Game Dev (Sort Of)",
+    "domain": "whobuilt.app",
+    "excerpt": "A dev rigged up an AI vibe coding setup where their dog presses buttons and the AI generates actual game logic. It hit 1042 upvotes on HN — turns out the barrier to game dev is now literally paw-level.",
+    "votes": 1042,
+    "comments": 335,
+    "readTime": 3,
+    "featured": true,
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "KEY POINTS:\n\n- Developer built a physical input setup letting their dog trigger AI game generation\n- The AI (vibe coding tools) interprets button presses and produces game logic\n- No traditional coding required — the dog is a legitimate co-creator\n- Went viral on HN with 1042 points, sparking debate about what 'programming' even means\n- Highlights how abstracted AI coding tools have become from actual code\n- The real story: vibe coding has removed humans from the loop — pets optional"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "slug": "denmark-ditches-microsoft-open-source",
+    "tag": "OPEN SOURCE",
+    "date": "FEB 25",
+    "title": "Denmark's Government Is Done with Microsoft",
+    "domain": "whobuilt.app",
+    "excerpt": "Denmark's Agency for Digital Government is moving off Microsoft software in favor of open-source alternatives, citing digital sovereignty and cost. It's one of the largest public-sector Microsoft exits in Europe.",
+    "votes": 498,
+    "comments": 271,
+    "readTime": 3,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "KEY POINTS:\n\n- Denmark's Agency for Digital Government officially plans to exit Microsoft ecosystem\n- Primary drivers: digital sovereignty + long-term cost reduction\n- Follows a broader EU trend of governments reducing dependency on US tech vendors\n- Open-source stack will replace Microsoft Office, cloud, and collaboration tools\n- No hard deadline announced, but the direction is firm\n- Similar moves seen in Germany (Schleswig-Holstein) and France (Gendarmerie)\n- Vendor lock-in and data residency concerns are accelerating the shift across Europe"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "slug": "claude-code-remote-control-api",
+    "tag": "DEV",
+    "date": "FEB 25",
+    "title": "Claude Code Now Has a Remote Control API",
+    "domain": "whobuilt.app",
+    "excerpt": "Anthropic shipped remote control for Claude Code — developers can now drive Claude Code instances programmatically via API, enabling fully automated coding pipelines and agent-to-agent workflows. This turns Claude Code from a dev tool into an orchestratable coding engine.",
+    "votes": 272,
+    "comments": 165,
+    "readTime": 2,
+    "featured": false,
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "KEY POINTS:\n\n- Claude Code can now be controlled remotely via API (not just CLI/interactive mode)\n- Enables programmatic automation: trigger code edits, file ops, and tasks from external systems\n- Key use case: agent-driven development — one AI orchestrating Claude Code as a sub-agent\n- Opens the door to CI/CD pipelines that use Claude Code as an autonomous coding step\n- Auth and session management handled through the API\n- Documented at code.claude.com/docs/en/remote-control\n- Signals Anthropic positioning Claude Code as infrastructure, not just a dev assistant"
       }
     ]
   }

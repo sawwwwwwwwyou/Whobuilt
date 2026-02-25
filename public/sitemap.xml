@@ -16,43 +16,18 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.whobuilt.xyz/article/openai-releases-gpt-5-with-native-reasoning-mode</loc>
+    <loc>https://www.whobuilt.xyz/article/dog-vibe-codes-games-with-ai</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.whobuilt.xyz/article/bun-2-0-now-with-full-windows-support-and-compiled-binaries</loc>
+    <loc>https://www.whobuilt.xyz/article/denmark-ditches-microsoft-open-source</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.whobuilt.xyz/article/github-actions-adds-managed-gpu-runners-for-ml-workflows</loc>
+    <loc>https://www.whobuilt.xyz/article/claude-code-remote-control-api</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.whobuilt.xyz/article/critical-rce-found-in-popular-npm-package-request-utils</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.whobuilt.xyz/article/figma-variables-advanced-logic-and-theming-guide</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.whobuilt.xyz/article/cloudflare-workers-now-supports-python-beta</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.whobuilt.xyz/article/pydantic-v2-10-new-validation-engine-and-performance-boost</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.whobuilt.xyz/article/tailwind-css-v4-0-alpha-faster-engine-and-new-oxide-compiler</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>
