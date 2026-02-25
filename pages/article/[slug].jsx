@@ -144,7 +144,13 @@ export default function ArticlePage({ article, content }) {
                                 </div>
                             ) : (
                                 <>
-                                    <p style={{ marginBottom: '24px' }}>{article.excerpt}</p>
+                                    {article.body ? (
+                                        <div className="markdown-body" style={{ marginBottom: '32px' }}>
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.body}</ReactMarkdown>
+                                        </div>
+                                    ) : (
+                                        <p style={{ marginBottom: '24px' }}>{article.excerpt}</p>
+                                    )}
                                     {article.snippets && article.snippets.length > 0 && (
                                         <div style={{ background: 'var(--c-ink)', color: 'var(--c-bg-card)', borderRadius: '4px', marginBottom: '24px', overflow: 'hidden' }}>
                                             {article.snippets.length > 1 && (
