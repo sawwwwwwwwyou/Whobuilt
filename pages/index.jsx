@@ -33,6 +33,8 @@ export default function Home() {
                 <meta property="og:title" content="WHOBUILT — Tech news in 5 minutes" />
                 <meta property="og:description" content="750+ burning monuments. 2M visitors. The guide covers the practical things that will make or break your experience." />
                 <meta property="og:type" content="website" />
+                <link rel="canonical" href="https://www.whobuilt.xyz/" />
+                <meta property="og:url" content="https://www.whobuilt.xyz/" />
             </Head>
 
             <div className="layout-grid">

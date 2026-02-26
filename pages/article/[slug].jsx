@@ -82,9 +82,11 @@ export default function ArticlePage({ article, content }) {
             <Head>
                 <title>{article.title} — WHOBUILT</title>
                 <meta name="description" content={article.excerpt} />
+                <link rel="canonical" href={`https://www.whobuilt.xyz/article/${article.slug}`} />
                 <meta property="og:title" content={article.title} />
                 <meta property="og:description" content={article.excerpt} />
                 <meta property="og:type" content="article" />
+                <meta property="og:url" content={`https://www.whobuilt.xyz/article/${article.slug}`} />
             </Head>
 
             {modal && (
