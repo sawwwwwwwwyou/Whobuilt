@@ -30,4 +30,19 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.whobuilt.xyz/article/karpathy-microgpt-200-lines-pure-python</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.whobuilt.xyz/article/obsidian-sync-headless-client-servers</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.whobuilt.xyz/article/windows-95-ui-usability-engineering-1996</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

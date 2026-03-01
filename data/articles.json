@@ -104,5 +104,65 @@
         "code": "KEY POINTS:\n\n- Claude Code now controllable via remote API (not just interactive CLI)\n- Enables CI/CD pipelines with Claude Code as an autonomous review/coding step\n- Agent-to-agent orchestration: one AI can drive Claude Code as a sub-agent\n- Trust model changes significantly — human review loop becomes optional\n- Replaces months of CLI wrapper hacks with a stable documented API\n- Documented at code.claude.com/docs/en/remote-control\n- AI coding tools moving from interactive assistants to pipeline components"
       }
     ]
+  },
+  {
+    "id": 14,
+    "slug": "karpathy-microgpt-200-lines-pure-python",
+    "tag": "AI",
+    "date": "MAR 01",
+    "title": "Karpathy's MicroGPT: A Full LLM in 200 Lines of Python",
+    "domain": "whobuilt.app",
+    "excerpt": "Andrej Karpathy published a 200-line pure Python file that trains and runs a GPT with zero dependencies. No PyTorch, no NumPy. The entire stack -- autograd, architecture, tokenizer, training loop -- fits in a single file. Key insight: everything else is just efficiency.",
+    "votes": 731,
+    "comments": 120,
+    "readTime": 3,
+    "featured": false,
+    "body": "Andrej Karpathy published a 200-line Python file that trains and runs a GPT. No PyTorch, no NumPy, no dependencies of any kind. Everything -- autograd, the neural network architecture, tokenization, the training loop, inference -- sits in a single file that fits on three columns of a page.\n\nThe file, available as a GitHub gist and on Google Colab, is the culmination of a series Karpathy has been building for years: micrograd (a minimal autograd engine), makemore (character-level language models), nanoGPT (a clean GPT-2 implementation). MicroGPT collapses the entire stack into one place. It trains on a dataset of 32,000 names and learns to generate plausible new ones. The training converges. The inference works. The whole thing runs in pure Python.\n\nThe core mechanism is a `Value` class that represents a scalar and tracks its gradient. Every arithmetic operation -- addition, multiplication, tanh activation -- records itself in a computation graph. When you call `backward()`, the engine walks that graph in reverse topological order and applies the chain rule at each node to compute gradients. This is autograd from scratch, identical in principle to what PyTorch does, without the C++ kernel and GPU dispatch underneath. The GPT-2-like architecture sits on top of that: attention heads, layer norms, embeddings -- all built from these scalar operations. Training uses a hand-written Adam optimizer. The whole thing is slow by any practical measure, but it runs.\n\nThe key insight Karpathy is demonstrating is captured in one sentence: **\"Everything else is just efficiency.\"** PyTorch, CUDA, flash attention, quantization, distributed training -- those are real and important, but they are optimizations on top of a core algorithm you can write in an afternoon. The algorithmic content of an LLM is surprisingly small. Production frameworks exist to run that algorithm fast at scale, not to make the algorithm possible.\n\nThis is also the fourth iteration of the same argument at increasing compression. Micrograd proved you could build autograd in roughly 150 lines. Makemore proved you could build a character LLM from scratch. NanoGPT proved you could train a serious GPT-2 in clean PyTorch. MicroGPT collapses all of that, removing PyTorch from the picture entirely. Each step in the series makes the there-is-no-magic-here argument harder to dismiss.\n\nFor you as a developer, the practical value is not that you should use microgpt for production work. It is that reading 200 lines gives you a ground-truth understanding of what your frameworks are actually doing. If you have been treating transformers as a black box and calling `model.fit()`, microgpt is the x-ray. When your training loss stops decreasing, or gradients explode, or attention patterns degenerate, you are much better equipped to diagnose it if you have once held the whole system in your head at once. The gist takes about an hour to read carefully. That hour has a high expected return.",
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "KEY POINTS:\n\n- 200-line pure Python file, zero dependencies, full LLM in one gist\n- Implements autograd from scratch via a scalar Value class\n- Backprop via topological sort and chain rule, same as PyTorch under the hood\n- Trains on 32,000 names dataset; generates plausible new names at inference\n- GPT-2-like architecture: attention heads, layer norms, hand-written Adam optimizer\n- Core insight: algorithms are small; everything else is efficiency and scale\n- Culmination of micrograd, makemore, nanoGPT series"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "slug": "obsidian-sync-headless-client-servers",
+    "tag": "DEV",
+    "date": "MAR 01",
+    "title": "Obsidian Sync Gets a Headless Client",
+    "domain": "whobuilt.app",
+    "excerpt": "Obsidian shipped a headless sync client -- you can now run Obsidian Sync as a background daemon on Linux servers, Raspberry Pis, and Docker containers. This closes a real gap for teams using Obsidian as a shared knowledge base on headless infrastructure.",
+    "votes": 470,
+    "comments": 160,
+    "readTime": 3,
+    "featured": false,
+    "body": "Obsidian shipped a headless sync client. You can now run Obsidian Sync without opening the desktop application -- as a background daemon, inside a Docker container, on a Raspberry Pi, or anywhere else without a display.\n\nBefore this, maintaining a synced vault on a server was a problem without a clean solution. The official path was running the full Electron desktop app, which requires a display or a virtual framebuffer -- not something you want on a production server. The unofficial path was stitching together rclone, git hooks, or WebDAV adapters, and hoping Obsidian's internal sync format did not change between releases. For individuals, this was manageable friction. For teams running shared vaults as knowledge bases or internal wikis, it was a genuine infrastructure gap.\n\nThe headless client runs as `obsidian-sync` and implements the same sync protocol as the desktop app. Your vault stays current on remote machines continuously, without human involvement. The practical applications are specific: a documentation server rendering vault notes to a static site, a CI pipeline pulling shared docs before builds, an automated backup destination, or an always-on sync node on network-attached storage. The vault-as-writable-database pattern becomes realistic when you can guarantee the sync layer is always running.\n\nThe subscription requirement is real -- Obsidian Sync costs $8/month, and the headless client does not change that. The client is also not open-source, so if your goal is full ownership of sync infrastructure, this does not move the needle. Git-based workflows remain the right answer for that case. What the headless client addresses is a specific and common situation: you already use and trust Obsidian Sync for its conflict resolution and reliability, but you need a server-side participant in the sync graph and do not want to stand up a full desktop environment to get it.\n\nWhat is telling is the volume of DIY workarounds this announcement surfaced. Multiple GitHub repos named some variant of obsidian-headless-sync -- shell scripts, Electron renderer patches, rclone configs, undocumented API calls. These solutions shared a failure mode: Obsidian updates, something internal shifts, and your carefully maintained sync pipeline breaks silently, often discovered days later when someone notices the server vault is weeks behind. Official tooling with documented behavior has a different reliability profile than artisanal shell scripts.\n\nIf you already pay for Obsidian Sync and run any server infrastructure, the headless client is straightforward to justify. Run it on your backup server or NAS and let it stay current automatically. The comparison is not between headless and nothing -- it is between headless and whatever improvised sync script you are currently babysitting.",
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "KEY POINTS:\n\n- Obsidian Sync now works without GUI -- runs as background daemon\n- Supports Linux servers, Raspberry Pi, Docker, CI pipelines, NAS\n- Same sync protocol as desktop app -- same conflict resolution behavior\n- Requires active Obsidian Sync subscription ($8/month)\n- Not open-source; git-based sync still better for full infrastructure ownership\n- Replaces fragile DIY rclone/git-hook workarounds with official tooling\n- Enables vault-as-database patterns for downstream automation"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "slug": "windows-95-ui-usability-engineering-1996",
+    "tag": "DESIGN",
+    "date": "MAR 01",
+    "title": "The 1996 Windows 95 UI Case Study Still Holds Up",
+    "domain": "whobuilt.app",
+    "excerpt": "A 1996 ACM paper on the Windows 95 interface resurfaced on HN. Microsoft ran 85+ usability studies with thousands of participants to design what became the most widely shipped GUI in history. The Start button, taskbar, and program discovery -- all came from research, not intuition.",
+    "votes": 253,
+    "comments": 150,
+    "readTime": 3,
+    "featured": false,
+    "body": "A 1996 ACM paper on the Windows 95 user interface resurfaced on Hacker News and pulled 250+ upvotes from people who work in UI professionally. \"The Windows 95 User Interface: A Case Study in Usability Engineering\" by Sullivan et al. describes how Microsoft ran more than 85 usability studies -- involving thousands of participants -- to design what became the most widely shipped GUI in history.\n\nThe methodology in the paper reads like a modern product handbook, except it was codified thirty years before that handbook existed. The team observed users with existing software to understand real behavior rather than assumed behavior. They built low-fidelity prototypes early and tested them before committing to implementation. They iterated based on test results rather than defending original designs. They measured task completion rates, error rates, and time-on-task systematically. This is standard UX practice in 2026. In 1993, when most of this work was happening, it was rigorous enough to be a conference paper.\n\nThe individual decisions documented in the paper reveal something counterintuitive: the UI patterns you consider obvious were not arrived at by reasoning from first principles. The Start button exists because research showed that users sitting in front of Windows 3.1 had no idea where to begin. They were not failing to find the right button -- they did not have a mental model for what starting a computer meant. The taskbar replaced Program Manager because observation of actual working behavior showed constant app-switching, and Program Manager required navigating back to a fixed home base every time. User testing found that a majority of participants could not locate programs they had already installed. Every one of these is a finding, not an assumption.\n\nThe HN discussion reveals how developers think about UI now. Several commenters noted they had assumed these patterns were obvious, or that Microsoft had simply made reasonable choices. The paper makes clear that none of it was obvious, and several reasonable-seeming choices turned out to be wrong under testing. The discussion also surfaced observations from people at large tech companies: current product teams do considerably less of this kind of research than Microsoft did in 1993, despite having far more data available.\n\n**What is worth taking from this is not nostalgia.** It is the specific methodology: observe actual behavior before designing, prototype before building, test with real users before shipping, and treat test results as authoritative rather than as obstacles to your existing plan. These are not controversial ideas. They are hard to execute when shipping fast, and the path of least resistance is to trust your own product intuition. The Windows 95 case study is a durable reminder that product intuition -- even at a company full of experienced people with deep domain knowledge -- is frequently wrong, and that the only reliable correction is contact with actual users.",
+    "snippets": [
+      {
+        "lang": "english",
+        "code": "KEY POINTS:\n\n- 1996 ACM paper: 85+ usability studies behind Windows 95 UI decisions\n- Start button came from research: users had no mental model of where to begin\n- Taskbar replaced Program Manager based on observed app-switching behavior\n- Majority of test users could not find programs they had already installed\n- Methodology: observe, prototype, test, iterate -- same as modern UX playbooks\n- HN: current product teams do less user research than 1993 Microsoft did\n- Obvious UI patterns were expensive research results, not intuitive design"
+      }
+    ]
   }
 ]
