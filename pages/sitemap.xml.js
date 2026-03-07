@@ -1,6 +1,6 @@
 import articles from '../data/articles.json';
 
-const BASE_URL = 'https://www.whobuilt.xyz';
+const BASE_URL = 'https://whobuilt.xyz';
 
 function generateSitemap() {
     const today = new Date().toISOString().split('T')[0];
