@@ -87,6 +87,23 @@ export default function ArticlePage({ article, content }) {
                 <meta property="og:description" content={article.excerpt} />
                 <meta property="og:type" content="article" />
                 <meta property="og:url" content={`https://www.whobuilt.xyz/article/${article.slug}`} />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'Article',
+                            headline: article.title,
+                            description: article.excerpt,
+                            url: `https://www.whobuilt.xyz/article/${article.slug}`,
+                            publisher: {
+                                '@type': 'Organization',
+                                name: 'WHOBUILT',
+                                url: 'https://www.whobuilt.xyz',
+                            },
+                        }),
+                    }}
+                />
             </Head>
 
             {modal && (
