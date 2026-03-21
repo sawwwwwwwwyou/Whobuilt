@@ -24,3 +24,11 @@ whobuilt.xyz — tech news aggregator. Next.js 14 + Vercel.
 - `id`: sequential from current max, never reuse
 - New articles go at the END of the array (frontend sorts by id/votes/comments)
 - JSON must remain valid after edits
+
+## Content Style
+- **Story-first, not spec-first**: prioritize human stories, founder journeys, indie hacker wins, real projects people built — not just dry technical announcements
+- **Product Hunt / tech news energy**: cover launches the way PH does — who built it, why, what problem it solves, early traction numbers, user reactions
+- **People over products**: name the founders, developers, researchers behind things. "Andrej Karpathy published..." beats "A new model was released..."
+- **Real-world angles**: how is this being used in the wild? What did someone actually build with it? What do the comments / community say?
+- **Prioritize stories with**: indie/solo builders, viral HN/Reddit threads, surprising use cases, products that shipped fast, underdog projects gaining traction
+- **Avoid**: pure corporate press releases, dry CVE advisories without human context, benchmark-only AI posts with no "who cares and why"
