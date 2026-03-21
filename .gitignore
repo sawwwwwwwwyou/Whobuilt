@@ -21,6 +21,12 @@ yarn-error.log*
 # env
 .env*.local
 
+# agent skills
+.agent/
+.agents/
+.claude/
+skills-lock.json
+
 # IDE
 .vscode/
 .idea/

@@ -87,15 +87,52 @@ export default function ArticlePage({ article, content }) {
                     dangerouslySetInnerHTML={{
                         __html: JSON.stringify({
                             '@context': 'https://schema.org',
-                            '@type': 'Article',
-                            headline: article.title,
-                            description: article.excerpt,
-                            url: `https://whobuilt.xyz/article/${article.slug}`,
-                            publisher: {
-                                '@type': 'Organization',
-                                name: 'WHOBUILT',
-                                url: 'https://www.whobuilt.xyz',
-                            },
+                            '@graph': [
+                                {
+                                    '@type': 'Article',
+                                    headline: article.title,
+                                    description: article.excerpt,
+                                    url: `https://whobuilt.xyz/article/${article.slug}`,
+                                    datePublished: article.dateISO || undefined,
+                                    dateModified: article.dateISO || undefined,
+                                    author: {
+                                        '@type': 'Organization',
+                                        name: 'WHOBUILT',
+                                        url: 'https://whobuilt.xyz',
+                                    },
+                                    publisher: {
+                                        '@type': 'Organization',
+                                        name: 'WHOBUILT',
+                                        url: 'https://whobuilt.xyz',
+                                    },
+                                    mainEntityOfPage: {
+                                        '@type': 'WebPage',
+                                        '@id': `https://whobuilt.xyz/article/${article.slug}`,
+                                    },
+                                },
+                                {
+                                    '@type': 'BreadcrumbList',
+                                    itemListElement: [
+                                        {
+                                            '@type': 'ListItem',
+                                            position: 1,
+                                            name: 'WHOBUILT',
+                                            item: 'https://whobuilt.xyz',
+                                        },
+                                        {
+                                            '@type': 'ListItem',
+                                            position: 2,
+                                            name: article.tag,
+                                            item: 'https://whobuilt.xyz',
+                                        },
+                                        {
+                                            '@type': 'ListItem',
+                                            position: 3,
+                                            name: article.title,
+                                        },
+                                    ],
+                                },
+                            ],
                         }),
                     }}
                 />

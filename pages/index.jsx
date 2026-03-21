@@ -30,6 +30,27 @@ export default function Home() {
                 <meta property="og:type" content="website" />
                 <link rel="canonical" href="https://whobuilt.xyz/" />
                 <meta property="og:url" content="https://whobuilt.xyz/" />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@graph': [
+                                {
+                                    '@type': 'WebSite',
+                                    name: 'WHOBUILT',
+                                    url: 'https://whobuilt.xyz',
+                                    description: 'Tech news in 5 minutes. Stories about startups, developers, and the people who build things.',
+                                },
+                                {
+                                    '@type': 'Organization',
+                                    name: 'WHOBUILT',
+                                    url: 'https://whobuilt.xyz',
+                                },
+                            ],
+                        }),
+                    }}
+                />
             </Head>
 
             {/* Full-screen hero with random article */}
