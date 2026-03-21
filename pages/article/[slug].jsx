@@ -56,6 +56,7 @@ import remarkGfm from 'remark-gfm';
 
 export default function ArticlePage({ article, content }) {
     const [activeLang, setActiveLang] = useState('en');
+    const [activeSnippetIdx, setActiveSnippetIdx] = useState(0);
 
     if (!article) {
         return (
@@ -149,6 +150,29 @@ export default function ArticlePage({ article, content }) {
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>{article.body}</ReactMarkdown>
                         ) : (
                             <p>{article.excerpt}</p>
+                        )}
+
+                        {/* Terminal-style KEY POINTS block */}
+                        {article.snippets && article.snippets.length > 0 && (
+                            <div className="terminal-block">
+                                {article.snippets.length > 1 && (
+                                    <div className="terminal-tabs">
+                                        {article.snippets.map((s, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setActiveSnippetIdx(idx)}
+                                                className={`terminal-tab ${activeSnippetIdx === idx ? 'terminal-tab--active' : ''}`}
+                                            >
+                                                {s.lang}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                                <div className="terminal-body">
+                                    <div className="terminal-prompt">// {article.snippets[activeSnippetIdx].lang.toUpperCase()}</div>
+                                    <pre className="terminal-code">{article.snippets[activeSnippetIdx].code}</pre>
+                                </div>
+                            </div>
                         )}
                     </div>
 

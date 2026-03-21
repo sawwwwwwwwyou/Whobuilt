@@ -832,11 +832,19 @@ a {
 }
 
 .markdown-body h2 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  margin: 28px 0 14px 0;
+  margin: 36px 0 16px 0;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.markdown-body h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
 }
 
 .markdown-body h3 {
@@ -846,7 +854,7 @@ a {
 }
 
 .markdown-body p {
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
 }
 
 .markdown-body ul,
@@ -918,6 +926,69 @@ a {
 .markdown-body em {
   color: var(--c-muted);
   font-size: 0.9em;
+}
+
+/* ══════════════════════════════════════
+   TERMINAL BLOCK (Key Points)
+   ══════════════════════════════════════ */
+.terminal-block {
+  background: var(--c-ink);
+  color: var(--c-bg-card);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 32px 0 8px;
+  border: var(--b-width) solid var(--c-border);
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.terminal-tabs {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal-tab {
+  padding: 8px 16px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: background 0.15s, color 0.15s;
+}
+
+.terminal-tab--active {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--c-accent);
+}
+
+.terminal-body {
+  padding: 24px;
+}
+
+.terminal-prompt {
+  color: var(--c-accent);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.terminal-code {
+  font-family: var(--f-mono);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  background: none;
+  padding: 0;
+  border: none;
 }
 
 /* ══════════════════════════════════════
@@ -1044,6 +1115,14 @@ a {
   .article-detail-body {
     padding: 20px 16px;
     font-size: 0.95rem;
+  }
+
+  .terminal-body {
+    padding: 16px;
+  }
+
+  .terminal-code {
+    font-size: 0.82rem;
   }
 
   .article-detail-footer {
