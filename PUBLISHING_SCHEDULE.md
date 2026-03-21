@@ -8,10 +8,11 @@ Runs twice weekly: **Tuesday and Friday** via Claude Code Scheduled Tasks.
 
 ## Step 1: Read Current State
 
-Read `data/articles.json`. Note:
-- The highest existing `id` (new articles = max_id + 1, +2, +3)
-- Existing slugs and article topics (to avoid duplicates)
-- The last 10 article titles (recency check)
+1. Read `CONTENT_SPEC.md` — contains ALL formatting, SEO, and quality rules. Follow them exactly.
+2. Read `data/articles.json`. Note:
+   - The highest existing `id` (new articles = max_id + 1, +2, +3)
+   - Existing slugs and article topics (to avoid duplicates)
+   - The last 10 article titles (recency check)
 
 ---
 
@@ -56,7 +57,7 @@ From the 5 curated stories, **randomly pick 3** to publish in this run. Each run
 
 ## Step 5: Write 3 Articles
 
-For each of the 3 stories, write one article. Follow ALL requirements below.
+For each of the 3 stories, write one article. Follow ALL rules from `CONTENT_SPEC.md`. Key requirements summarized below.
 
 ### JSON Schema
 
@@ -92,53 +93,60 @@ For each of the 3 stories, write one article. Follow ALL requirements below.
 
 ---
 
-## SEO Requirements (CRITICAL — read carefully)
+## Body Format (from CONTENT_SPEC.md — follow exactly)
+
+### Structure: H2 Sections + Lead-With-Answer
+
+```markdown
+[Opening paragraph — 2-3 sentences. State the core fact. Primary keyword within first 50 words. Name the person/org behind the news.]
+
+## [H2 — Keyword-Rich Heading Matching Search Queries]
+
+[2-3 short paragraphs. Lead with the direct answer FIRST, then expand. The first 40-60 words after each H2 must work as a standalone extractable block — this is what AI search engines cite.]
+
+## [H2 — How It Works / Technical Detail]
+
+[2-3 paragraphs. Include specific numbers, dates, version numbers. Use **bold** for key terms on first mention. Each paragraph 3-4 sentences max.]
+
+## [H2 — Why It Matters / What Developers Should Do]
+
+[1-2 paragraphs. Concrete takeaway. What changes? What action should the reader take?]
+```
+
+### Critical Rules
+
+1. **Lead every section with the answer** — AI extracts the first 40-60 words after a heading
+2. **Name people** — "Andrej Karpathy published..." not "A researcher released..."
+3. **Include specific stats** — numbers with sources get +40% AI citation boost
+4. **Date everything** — "In March 2026" not "recently"
+5. **Each claim works standalone** — if ripped from context, still makes sense
+6. **3-4 H2 headers per article** — keyword-rich, match how people search
+7. **3-4 sentences per paragraph max** — no walls of text
+8. **No AI tells** — no "It's worth noting", "Delve into", "In conclusion", "It is important to", em-dash overuse (max 1 per article)
 
 ### Title (50-60 characters)
 - Count characters before writing
-- Primary keyword near the beginning (first 3-4 words)
-- Use power formats: numbers ("3 Ways..."), year ("2026"), action ("How X Changes Y"), contrast ("Why X Beats Y")
-- Compelling and specific — avoid vague titles like "AI is Getting Better"
-- Good examples:
-  - "Why Rust Is Replacing C in Embedded Systems" (45 chars)
-  - "OpenAI Cuts API Costs 80% — What Changes for Devs" (50 chars)
-  - "Karpathy's MicroGPT: 200 Lines of Pure Python" (46 chars)
+- Primary keyword in first 3-4 words
+- Power formats: numbers, year ("2026"), action verbs, contrast
+- Good: "Karpathy's MicroGPT: 200 Lines of Pure Python" (46 chars)
+- Bad: "A New Interesting AI Model Was Released" (vague, passive)
 
 ### Slug (3-5 words, no stop words)
 - Primary keyword first
 - Remove: a, the, is, for, in, of, to, and, or, with
-- Good examples: `rust-embedded-systems-2026`, `openai-api-cost-reduction`, `karpathy-microgpt-pure-python`
 
 ### Excerpt / Meta Description (EXACTLY 145-160 characters)
-- Count characters carefully — this is the Google search snippet
-- Include primary keyword naturally in the first sentence
-- State the key fact or insight directly
-- Complete sentence, no trailing ellipsis, no truncation
-- Make it click-worthy: reader should know exactly what they'll learn
-- Bad (too long, vague): "This article explores the recent developments in AI and what they might mean for the future of software development in general."
-- Good: "OpenAI's new batch API drops inference costs by 80%. Here's what changes for developers building on GPT-4o today." (111 chars — extend to 145-160)
-
-### Body (600-720 words)
-Structure:
-1. **Para 1 — Hook**: What happened. Primary keyword within first 100 words.
-2. **`## <H2 Header with keyword>`** — every 2-3 paragraphs, 2-3 headers total
-3. **Para 2-3 — Context**: Why it matters, how it works
-4. **Para 4-5 — Implications**: What developers/builders should know
-5. **Final para — Takeaway**: Concrete action or broader perspective
-
-Rules:
-- 3-4 sentences per paragraph max
-- Use keyword variations and synonyms naturally — don't stuff
-- `**bold**` for key terms, first mention of the product/tool
-- No bullet lists in body (those go in snippets only)
-- NO AI tells: "It's worth noting", "Delve into", "In conclusion", "It is important to", em-dash overuse (max 1 per article), "Certainly"
-- Voice: direct, analytical, developer-focused. Second person ("you") for advice, third person for reporting.
+- Count characters — this is the Google search snippet
+- Primary keyword in first sentence
+- State the key fact directly, complete sentence
+- Include a number or specific claim
 
 ### Snippets (KEY POINTS)
 - Exactly 5 bullet points
-- Each point: one concrete fact or number, max 12 words
+- Each point: one concrete fact or number, max 15 words
+- Start with the most important/surprising point
+- Include at least one number/statistic
 - Extracted from body — not invented separately
-- Start with: `KEY POINTS:\n\n-`
 
 ---
 
@@ -151,9 +159,15 @@ Verify before saving:
 - [ ] All have `featured: false`
 - [ ] All have `domain: "whobuilt.app"`
 - [ ] No slug duplicates with existing articles
-- [ ] Excerpts are 145-160 characters each
-- [ ] Titles are 50-60 characters each
+- [ ] Excerpts are 145-160 characters each (count!)
+- [ ] Titles are 50-60 characters each (count!)
 - [ ] Body word count is 600-720 words each
+- [ ] Body has 3-4 H2 headers with keyword-rich titles
+- [ ] Primary keyword in first 50 words of body
+- [ ] Each H2 section leads with the direct answer
+- [ ] At least one specific statistic/number in body
+- [ ] People/orgs are named, not anonymous
+- [ ] No AI writing tells
 - [ ] JSON is valid (no trailing commas, quotes are correct)
 
 ---
