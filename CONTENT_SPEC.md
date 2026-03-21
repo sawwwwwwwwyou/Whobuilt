@@ -74,6 +74,37 @@ Visit `https://www.whobuilt.xyz/article/<slug>` and confirm:
 - All new auto-published articles: `featured: false` — NO EXCEPTIONS
 - `ArticleList` filters out `featured: true` — setting it on new articles hides them
 
+## SEO Requirements
+
+### Title
+- **50-60 characters** (count before writing)
+- Primary keyword in first 3-4 words
+- Use power formats: numbers, year ("2026"), "How X", "Why X Beats Y"
+- No vague titles ("AI is Getting Better")
+
+### Slug
+- **3-5 words**, primary keyword first
+- Remove stop words: a, the, is, for, in, of, to, and, or, with
+
+### Excerpt = Meta Description
+- **EXACTLY 145-160 characters** (Google truncates beyond this)
+- Primary keyword in first sentence
+- Complete sentence, no trailing ellipsis
+- State the key fact — make it click-worthy in search results
+
+### Body
+- **600-720 words** (minimum for Google indexing; current articles extended to this)
+- Use `##` H2 headers with keywords every 2-3 paragraphs (2-3 headers total)
+- Primary keyword within first 100 words
+- Short paragraphs: 3-4 sentences max
+- No bullet lists in body — those go in `snippets` only
+
+### Structured Data
+- JSON-LD Article schema auto-injected by `pages/article/[slug].jsx` — no action needed
+- Sitemap auto-generated from `articles.json` by `pages/sitemap.xml.js` — no action needed
+
+---
+
 ## Source: Hacker News Auto-Pipeline
 
 - Fetch: `https://hacker-news.firebaseio.com/v0/topstories.json`
