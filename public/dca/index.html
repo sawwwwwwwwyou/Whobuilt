@@ -3057,88 +3057,114 @@ table.summary {
 <style>
 .dca-welcome {
   position: fixed; inset: 0;
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(20, 25, 34, 0.62);
   display: none; align-items: center; justify-content: center;
   z-index: 9999;
   padding: 24px;
   -webkit-font-smoothing: antialiased;
+  backdrop-filter: blur(18px);
 }
 .dca-welcome.is-open { display: flex; }
 .dca-welcome__card {
-  background: #ffffff;
-  color: #0f172a;
-  max-width: 480px;
+  --welcome-ink: #141922;
+  --welcome-muted: #5f6b7a;
+  --welcome-line: #e6e9ee;
+  background:
+    radial-gradient(circle at 9% 0%, rgba(49, 95, 186, 0.055), transparent 34%),
+    linear-gradient(135deg, rgba(255,255,255,0.97), rgba(251,252,255,0.96));
+  color: var(--welcome-ink);
+  max-width: 560px;
   width: 100%;
-  border-radius: 16px;
-  padding: 36px 40px 32px;
-  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.35);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif;
+  border: 1px solid rgba(255,255,255,0.76);
+  border-radius: 22px;
+  padding: 34px;
+  box-shadow: 0 30px 80px rgba(20, 25, 34, 0.28);
+  font-family: "Avenir Next", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.55;
   font-size: 15px;
 }
-.dca-welcome__card h2 {
-  font-size: 24px;
-  margin: 0 0 14px;
-  color: #0f172a;
-}
-.dca-welcome__card p { margin: 0 0 12px; color: #1e293b; }
-.dca-welcome__lead { font-size: 16px; color: #0f172a !important; }
-.dca-welcome__card strong { color: #0f172a; }
-.dca-welcome__disclaimer {
-  margin: 18px 0 22px !important;
+.dca-welcome__eyebrow {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: #315fba;
   font-size: 12px;
-  color: #64748b;
-  font-style: italic;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
 }
+.dca-welcome__card h2 {
+  margin: 0 0 14px;
+  color: var(--welcome-ink);
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+.dca-welcome__card p {
+  margin: 0;
+  color: #2f3948;
+  font-size: 16px;
+  line-height: 1.66;
+}
+.dca-welcome__lead { color: #2f3948 !important; }
+.dca-welcome__card strong { color: var(--welcome-ink); font-weight: 850; }
 .dca-welcome__actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: center;
+  margin-top: 26px;
 }
 .dca-welcome__primary,
 .dca-welcome__secondary {
-  display: inline-block;
-  padding: 11px 22px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border-radius: 13px;
+  font-size: 13px;
+  font-weight: 820;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.12s, color 0.12s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
   text-decoration: none;
 }
 .dca-welcome__primary {
-  background: #0f172a;
-  color: #f8fafc;
-  border: 1px solid #0f172a;
+  background: var(--welcome-ink);
+  color: #ffffff;
+  border: 1px solid var(--welcome-ink);
+  box-shadow: 0 10px 22px rgba(20, 25, 34, 0.15);
 }
-.dca-welcome__primary:hover { background: #1e293b; }
+.dca-welcome__primary:hover { background: #1f2632; transform: translateY(-1px); }
 .dca-welcome__secondary {
-  background: transparent;
-  color: #475569;
-  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: var(--welcome-ink);
+  border: 1px solid var(--welcome-line);
 }
-.dca-welcome__secondary:hover { background: #f1f5f9; color: #0f172a; }
+.dca-welcome__secondary:hover {
+  border-color: var(--welcome-ink);
+  background: #f6f7f9;
+  transform: translateY(-1px);
+}
 @media (max-width: 600px) {
-  .dca-welcome__card { padding: 28px 24px; font-size: 14px; }
-  .dca-welcome__card h2 { font-size: 20px; }
+  .dca-welcome__card { padding: 28px 24px; }
+  .dca-welcome__card h2 { font-size: 32px; }
   .dca-welcome__actions { flex-direction: column; align-items: stretch; }
   .dca-welcome__primary, .dca-welcome__secondary { text-align: center; }
 }
 </style>
 <div class="dca-welcome__card">
-<h2>Hi!</h2>
-<p class="dca-welcome__lead">This is a backtest of <strong>25 DCA strategies</strong> across BTC, ETH, S&amp;P 500, and NASDAQ — full history. You can see what each strategy historically yielded and at what drawdown.</p>
-<p>If you're not sure what DCA is, what "MM" means in the table, or why to look at drawdown — open the knowledge base. It walks through every term and strategy in plain language.</p>
-<p class="dca-welcome__disclaimer">Past performance doesn't predict the future. This is a research project, not financial advice.</p>
+<span class="dca-welcome__eyebrow">DCA Matrix</span>
+<h2>What's going on here</h2>
+<p class="dca-welcome__lead"><strong>25 buying rules</strong> for crypto and stocks. The simplest: buy $100 every Friday. The smartest: buy more when price drops, save cash in calm times. All tested on the full history of BTC, ETH, S&amp;P 500, and NASDAQ. New to DCA? Start with the knowledge base.</p>
 <div class="dca-welcome__actions">
-  <a class="dca-welcome__primary" href="/dca/faq.html">Knowledge base</a>
+  <a class="dca-welcome__primary" href="/dca/faq.html" data-faq-open>Knowledge base</a>
   <button type="button" class="dca-welcome__secondary" data-action="dismiss">To the matrix</button>
 </div>
 </div>
 <script>
 (function () {
-  var KEY = 'dca_welcome_dismissed_v1';
+  var KEY = 'dca_welcome_dismissed_v2';
   var overlay = document.getElementById('dca-welcome');
   if (!overlay) return;
   function open() { overlay.classList.add('is-open'); }
@@ -3161,6 +3187,277 @@ table.summary {
 })();
 </script>
 </div>
+
+
+<style>
+.dca-faq-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9991;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  border: 1px solid rgba(20, 25, 34, 0.16);
+  border-radius: 999px;
+  background: #141922;
+  color: #ffffff;
+  font: inherit;
+  font-family: "Avenir Next", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0;
+  box-shadow: 0 18px 44px rgba(20, 25, 34, 0.20);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+}
+.dca-faq-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 56px rgba(20, 25, 34, 0.25);
+}
+.dca-faq-fab:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.22);
+  outline-offset: 3px;
+}
+html.has-faq-drawer-open .dca-faq-fab {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+.dca-faq-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  visibility: hidden;
+  pointer-events: none;
+}
+.dca-faq-drawer.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+.dca-faq-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 25, 34, 0.42);
+  opacity: 0;
+  backdrop-filter: blur(10px);
+  transition: opacity 0.22s ease;
+}
+.dca-faq-drawer.is-open .dca-faq-drawer__backdrop {
+  opacity: 1;
+}
+.dca-faq-drawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  min-width: 560px;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-left: 1px solid #d8dde5;
+  background: #ffffff;
+  box-shadow: -30px 0 80px rgba(20, 25, 34, 0.20);
+  transform: translateX(102%);
+  transition: transform 0.26s cubic-bezier(.2,.8,.2,1);
+}
+.dca-faq-drawer.is-open .dca-faq-drawer__panel {
+  transform: translateX(0);
+}
+.dca-faq-drawer__head {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px 14px 22px;
+  border-bottom: 1px solid #e6e9ee;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+}
+.dca-faq-drawer__title {
+  min-width: 0;
+}
+.dca-faq-drawer__title strong {
+  display: block;
+  color: #141922;
+  font-size: 17px;
+  line-height: 1.15;
+}
+.dca-faq-drawer__title span {
+  display: block;
+  margin-top: 3px;
+  color: #5f6b7a;
+  font-size: 12px;
+}
+.dca-faq-drawer__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.dca-faq-drawer__full,
+.dca-faq-drawer__close {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e6e9ee;
+  border-radius: 999px;
+  background: #fff;
+  color: #141922;
+  text-decoration: none;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 760;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+}
+.dca-faq-drawer__full {
+  padding: 0 13px;
+}
+.dca-faq-drawer__close {
+  width: 38px;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+}
+.dca-faq-drawer__full:hover,
+.dca-faq-drawer__close:hover {
+  border-color: #141922;
+  background: #141922;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.dca-faq-drawer iframe {
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  border: 0;
+  background: #fff;
+}
+html.has-faq-drawer-open,
+html.has-faq-drawer-open body {
+  overflow: hidden;
+}
+@media (max-width: 520px) {
+  .dca-faq-fab {
+    right: 16px;
+    bottom: 16px;
+    min-height: 46px;
+    padding: 0 18px;
+  }
+  .dca-faq-drawer__panel {
+    width: 100vw;
+    min-width: 0;
+  }
+}
+@media (max-width: 560px) {
+  .dca-faq-drawer__head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .dca-faq-drawer__actions {
+    width: 100%;
+  }
+  .dca-faq-drawer__full {
+    flex: 1;
+  }
+}
+</style>
+
+<button type="button" class="dca-faq-fab" data-faq-open data-faq-href="/dca/faq.html" aria-label="Open knowledge base">Knowledge base</button>
+<div id="dca-faq-drawer" class="dca-faq-drawer" aria-hidden="true">
+  <div class="dca-faq-drawer__backdrop" data-faq-close></div>
+  <aside class="dca-faq-drawer__panel" role="dialog" aria-modal="true" aria-label="Knowledge base">
+    <header class="dca-faq-drawer__head">
+      <div class="dca-faq-drawer__title">
+        <strong>Knowledge base</strong>
+        <span>Open over the matrix</span>
+      </div>
+      <div class="dca-faq-drawer__actions">
+        <a class="dca-faq-drawer__full" href="/dca/faq.html" data-faq-full>Open full page</a>
+        <button class="dca-faq-drawer__close" type="button" data-faq-close aria-label="Close">×</button>
+      </div>
+    </header>
+    <iframe title="Knowledge base"></iframe>
+  </aside>
+</div>
+
+<script>
+(function () {
+  var drawer = document.getElementById('dca-faq-drawer');
+  if (!drawer) return;
+  var frame = drawer.querySelector('iframe');
+  var fullLink = drawer.querySelector('[data-faq-full]');
+  var baseHref = "/dca/faq.html";
+  var lastFocus = null;
+
+  function isLocalDev(url) {
+    return /^(127\.0\.0\.1|localhost|\[::1\])$/.test(url.hostname);
+  }
+
+  function normalizeHref(raw, embed) {
+    var url = new URL(raw || baseHref, window.location.href);
+    if (isLocalDev(window.location) && url.pathname.indexOf('/dca/') === 0) {
+      url.pathname = url.pathname.replace(/^\/dca\//, '/');
+    }
+    if (embed) url.searchParams.set('embed', '1');
+    return url.href;
+  }
+
+  function dismissWelcomeIfNeeded() {
+    var welcome = document.getElementById('dca-welcome');
+    if (welcome) welcome.classList.remove('is-open');
+    try { localStorage.setItem('dca_welcome_dismissed_v2', '1'); } catch (e) {}
+  }
+
+  function openDrawer(rawHref, trigger) {
+    var fullHref = normalizeHref(rawHref || baseHref, false);
+    lastFocus = trigger || document.activeElement;
+    dismissWelcomeIfNeeded();
+    if (fullLink) fullLink.href = fullHref;
+    frame.src = normalizeHref(rawHref || baseHref, true);
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('has-faq-drawer-open');
+    var closeBtn = drawer.querySelector('[data-faq-close]');
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('has-faq-drawer-open');
+    if (lastFocus && typeof lastFocus.focus === 'function') {
+      lastFocus.focus({ preventScroll: true });
+    }
+  }
+
+  document.addEventListener('click', function (event) {
+    var trigger = event.target.closest && event.target.closest('[data-faq-open]');
+    if (!trigger) return;
+    var rawHref = trigger.getAttribute('href') || trigger.getAttribute('data-faq-href') || baseHref;
+    event.preventDefault();
+    openDrawer(rawHref, trigger);
+  });
+
+  drawer.addEventListener('click', function (event) {
+    if (event.target.closest && event.target.closest('[data-faq-close]')) closeDrawer();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+  });
+
+  window.openDcaFaq = openDrawer;
+})();
+</script>
+
+
 <div class="app">
   <nav class="sidebar">
 

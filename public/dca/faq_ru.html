@@ -4,236 +4,651 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DCA Backtest Matrix — База знаний</title>
+<script>
+if (new URLSearchParams(window.location.search).get('embed') === '1') {
+  document.documentElement.classList.add('faq-embed');
+}
+</script>
 <style>
-* { box-sizing: border-box; }
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-soft: #fbfbfc;
+  --ink: #141922;
+  --muted-ink: #5f6b7a;
+  --faint-ink: #96a0ae;
+  --line: #e6e9ee;
+  --line-strong: #d8dde5;
+  --accent-soft: #eef2f7;
+  --green: #16735a;
+  --green-soft: #f1f6f3;
+  --red: #bd2f45;
+  --red-soft: #fff2f4;
+  --amber: #9a6a1e;
+  --amber-soft: #faf5ec;
+  --blue: #315fba;
+  --blue-soft: #f1f5fc;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --shadow: 0 18px 55px rgba(20, 25, 34, 0.08);
+}
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif;
-  background: #f8fafc;
-  color: #0f172a;
+  overflow-x: hidden;
+  font-family: "Avenir Next", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-.faq-wrap { max-width: 760px; margin: 0 auto; padding: 56px 32px 96px; }
-.faq-back {
-  display: inline-block;
-  font-size: 13px;
-  color: #1d4ed8;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 9% 0%, rgba(49, 95, 186, 0.045), transparent 28%),
+    radial-gradient(circle at 96% 12%, rgba(22, 115, 90, 0.04), transparent 26%),
+    linear-gradient(rgba(20, 25, 34, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 25, 34, 0.032) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+}
+html.faq-embed body::before {
+  display: none;
+}
+.faq-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 32px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px);
+}
+.faq-brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: 12px;
+  color: var(--ink);
   text-decoration: none;
-  margin-bottom: 32px;
-  font-weight: 500;
 }
-.faq-back:hover { text-decoration: underline; }
-.faq-wrap h1 { font-size: 36px; margin: 0 0 8px; color: #0f172a; }
-.faq-lede { font-size: 16px; color: #475569; margin: 0 0 36px; max-width: 640px; }
-.faq-toc {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 18px 24px;
-  margin-bottom: 48px;
+.faq-brand-mark {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 850;
 }
-.faq-toc ul { margin: 0; padding-left: 18px; }
-.faq-toc li { margin-bottom: 4px; font-size: 14px; }
-.faq-toc a { color: #334155; text-decoration: none; }
-.faq-toc a:hover { color: #0f172a; text-decoration: underline; }
-.faq-section { margin-bottom: 56px; }
-.faq-section h2 {
-  font-size: 13px;
+.faq-brand strong {
+  display: block;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.1;
+}
+.faq-brand span:last-child {
+  min-width: 0;
+}
+.faq-brand small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted-ink);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.faq-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.faq-back,
+.faq-lang-btn {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted-ink);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 750;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
+}
+.faq-back:hover,
+.faq-lang-btn:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.faq-lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.faq-lang-btn {
+  min-height: 30px;
+  border: 0;
+  border-radius: 0;
+  padding: 0 12px;
+  background: transparent;
+  letter-spacing: 0.06em;
+}
+.faq-lang-btn.is-active {
+  background: var(--ink);
+  color: var(--surface);
+  pointer-events: none;
+}
+.faq-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 34px 32px 78px;
+}
+.faq-hero {
+  display: block;
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(49, 95, 186, 0.04), transparent 34%),
+    linear-gradient(135deg, #fff 0%, #fbfcff 100%);
+  box-shadow: var(--shadow);
+}
+.faq-eyebrow {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 850;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: #64748b;
-  margin: 0 0 24px;
-  font-weight: 700;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e2e8f0;
+  letter-spacing: 0.11em;
+}
+.faq-hero h1 {
+  max-width: 780px;
+  margin: 8px 0 14px;
+  color: var(--ink);
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+}
+.faq-lede {
+  max-width: 770px;
+  margin: 0;
+  color: var(--muted-ink);
+  font-size: 17px;
+  line-height: 1.65;
+}
+.faq-main {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin-top: 18px;
+}
+.faq-toc {
+  position: sticky;
+  top: 86px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.90);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+.faq-toc-title {
+  margin: 0 0 12px;
+  color: var(--faint-ink);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.faq-toc ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.faq-toc a {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 760;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.faq-toc a:hover {
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+.faq-toc a strong {
+  min-width: 30px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+}
+.faq-section {
+  --sec: var(--blue);
+  --sec-soft: var(--blue-soft);
+  margin-bottom: 18px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  scroll-margin-top: 92px;
+}
+.faq-section--basics { --sec: var(--blue); --sec-soft: var(--blue-soft); }
+.faq-section--metrics { --sec: var(--green); --sec-soft: var(--green-soft); }
+.faq-section--strategies { --sec: var(--ink); --sec-soft: var(--accent-soft); }
+.faq-section--methodology { --sec: var(--amber); --sec-soft: var(--amber-soft); }
+.faq-section--practice { --sec: var(--red); --sec-soft: var(--red-soft); }
+.faq-section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.faq-section-kicker {
+  color: var(--sec);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.faq-section h2 {
+  margin: 5px 0 0;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+.faq-section-count {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--sec-soft);
+  color: var(--sec);
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
 }
 .faq-item {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 22px 28px;
-  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 20px 22px 20px 24px;
+  margin-top: 12px;
+  background: linear-gradient(180deg, #fff, #fbfbfc);
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.faq-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 4px;
+  border-radius: 0 999px 999px 0;
+  background: var(--sec);
+  opacity: 0.56;
+}
+.faq-item:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(20, 25, 34, 0.06);
 }
 .faq-item h3 {
-  font-size: 17px;
   margin: 0 0 10px;
-  color: #0f172a;
-  font-weight: 600;
-  line-height: 1.35;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.28;
+  letter-spacing: -0.025em;
 }
 .faq-item h3 a { color: inherit; text-decoration: none; }
-.faq-item h3 a:hover { color: #1d4ed8; }
-.faq-item p { margin: 0 0 12px; color: #1e293b; font-size: 15px; }
+.faq-item h3 a::after {
+  content: "#";
+  margin-left: 8px;
+  color: var(--faint-ink);
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.faq-item h3 a:hover { color: var(--blue); }
+.faq-item h3 a:hover::after { opacity: 1; }
+.faq-item p {
+  margin: 0 0 12px;
+  color: #2f3948;
+  font-size: 15px;
+  line-height: 1.66;
+}
 .faq-item p:last-child { margin-bottom: 0; }
-.faq-item ul, .faq-item ol { margin: 8px 0 14px; padding-left: 22px; color: #1e293b; }
-.faq-item li { margin-bottom: 6px; font-size: 15px; }
-.faq-item strong { color: #0f172a; font-weight: 600; }
-.faq-item em { color: #334155; font-style: italic; }
+.faq-item ul, .faq-item ol {
+  margin: 8px 0 14px;
+  padding-left: 22px;
+  color: #2f3948;
+}
+.faq-item li {
+  margin-bottom: 6px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.faq-item li::marker { color: var(--sec); font-weight: 800; }
+.faq-item strong { color: var(--ink); font-weight: 800; }
+.faq-item em { color: #4f5c6d; font-style: italic; }
 .faq-item sup { font-size: 11px; vertical-align: super; }
 .faq-anchor:target,
-.faq-item:target { scroll-margin-top: 24px; }
+.faq-item:target { scroll-margin-top: 104px; }
 .faq-item:target {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: rgba(49, 95, 186, 0.46);
+  background:
+    linear-gradient(180deg, rgba(49, 95, 186, 0.045), rgba(255,255,255,0.96)),
+    #fff;
+  box-shadow:
+    inset 0 0 0 1px rgba(49, 95, 186, 0.18),
+    0 16px 38px rgba(20,25,34,0.08);
 }
 .faq-footer {
-  margin-top: 56px;
-  padding-top: 24px;
-  border-top: 1px solid #e2e8f0;
+  margin-top: 28px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.72);
   font-size: 13px;
-  color: #64748b;
+  color: var(--muted-ink);
+}
+html.faq-embed,
+html.faq-embed body {
+  background: var(--surface);
+}
+html.faq-embed .faq-topbar,
+html.faq-embed .faq-hero,
+html.faq-embed .faq-footer {
+  display: none;
+}
+html.faq-embed .faq-wrap {
+  max-width: none;
+  padding: 20px 22px 44px;
+}
+html.faq-embed .faq-main {
+  display: block;
+  margin-top: 0;
+}
+html.faq-embed .faq-toc {
+  position: relative;
+  top: auto;
+  margin-bottom: 14px;
+  box-shadow: none;
+  background: var(--surface-soft);
+}
+html.faq-embed .faq-toc ul {
+  grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+}
+html.faq-embed .faq-section {
+  margin-bottom: 14px;
+  padding: 22px;
+  box-shadow: none;
+}
+html.faq-embed .faq-item {
+  padding: 18px 20px 18px 22px;
+}
+@media (max-width: 900px) {
+  .faq-topbar { padding: 12px 20px; }
+  .faq-wrap { padding: 24px 20px 56px; }
+  .faq-main {
+    grid-template-columns: 1fr;
+  }
+  .faq-toc {
+    position: relative;
+    top: auto;
+  }
 }
 @media (max-width: 600px) {
-  .faq-wrap { padding: 32px 20px 56px; }
-  .faq-wrap h1 { font-size: 28px; }
-  .faq-item { padding: 18px 20px; }
+  .faq-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .faq-topbar-actions { width: 100%; justify-content: space-between; }
+  .faq-hero { padding: 24px; }
+  .faq-hero h1 { font-size: 42px; }
+  .faq-section { padding: 20px; }
+  .faq-section-head { flex-direction: column; }
+  .faq-item { padding: 18px 18px 18px 20px; }
 }
 </style>
 </head>
 <body>
+<header class="faq-topbar">
+  <a href="/dca/index_ru.html" class="faq-brand" aria-label="DCA Matrix">
+    <span class="faq-brand-mark">D</span>
+    <span><strong>DCA Matrix</strong><small>База знаний</small></span>
+  </a>
+  <div class="faq-topbar-actions">
+    <a href="/dca/index_ru.html" class="faq-back">← К матрице</a>
+    <div class="faq-lang-switch" aria-label="Language">
+      <a class="faq-lang-btn is-active" href="/dca/faq_ru.html">RU</a>
+      <a class="faq-lang-btn" href="/dca/faq.html">EN</a>
+    </div>
+  </div>
+</header>
 <div class="faq-wrap">
-  <a href="/dca/index_ru.html" class="faq-back">← К матрице</a>
-  <h1>База знаний</h1>
-  <p class="faq-lede">Простыми словами про DCA, метрики и стратегии. Если впервые здесь или что-то непонятно в матрице — это правильное место для начала.</p>
-  <nav class="faq-toc" aria-label="Table of contents"><ul><li><a href="#sec-basics">Основы</a></li><li><a href="#sec-metrics">Метрики</a></li><li><a href="#sec-strategies">Стратегии</a></li><li><a href="#sec-methodology">Методология</a></li><li><a href="#sec-practice">Практика</a></li></ul></nav>
-  <section id="sec-basics" class="faq-section"><h2>Основы</h2><article id="q-what-is-dca" class="faq-item"><h3><a href="#q-what-is-dca" class="faq-anchor">Что такое DCA?</a></h3><p><strong>DCA</strong> = Dollar-Cost Averaging, «усреднение по доллару». По-простому: ты покупаешь актив (BTC, акции, ETF) равными порциями с какой-то периодичностью.</p>
-<p>Пример: каждую пятницу пополняешь брокерский счёт на $100 и сразу покупаешь BTC на эту сотку. Всё. Не угадываешь дно, не ждёшь идеального момента — просто заходишь равными шагами во времени.</p>
-<p>Идея: если рынок упал — ты купишь больше BTC за свои $100. Если вырос — меньше. На длинной дистанции цена усредняется, ты не зависишь от удачи поймать вершину или дно.</p></article><article id="q-why-now" class="faq-item"><h3><a href="#q-why-now" class="faq-anchor">Почему DCA важен именно сейчас?</a></h3><p>На апрель 2026 BTC, ETH, S&amp;P 500 и NASDAQ снова на all-time-high — самые дорогие за всю историю.</p>
-<p>Если зайти всем капиталом одним днём, есть шанс купить вершину перед коррекцией -30% — это моральный ад. А если разнести покупки на 6-12 месяцев, риск «купил пик» размывается: часть бюджета зайдёт на коррекции по более низкой цене.</p>
-<p>DCA не делает тебя богаче в идеальном сценарии (там lump-sum выиграл бы). Зато он защищает от худшего сценария — а на ATH худший сценарий пугает больше всего.</p></article><article id="q-ath" class="faq-item"><h3><a href="#q-ath" class="faq-anchor">Что такое ATH?</a></h3><p><strong>ATH</strong> = All-Time High, исторический максимум. Цена, которую актив никогда раньше не превышал.</p>
-<p>BTC ATH в апреле 2026 ≈ $109k. S&amp;P 500 ATH ≈ 6 100. Когда говорят «рынок на ATH», имеется в виду что прямо сейчас он стоит больше, чем когда-либо в истории.</p></article><article id="q-drawdown" class="faq-item"><h3><a href="#q-drawdown" class="faq-anchor">Что такое просадка (drawdown)?</a></h3><p><strong>Просадка</strong> = насколько твой портфель упал от своего пика. Если ты дошёл до $100k, потом портфель упал до $40k — просадка 60%.</p>
-<p>Это эмоциональный показатель: насколько больно держать стратегию. На крипте просадки 70-80% случаются регулярно. На акциях редкость >50% (и то 2008 год).</p>
-<p><strong>MaxDD</strong> в табличке — максимальная просадка за весь тестовый период. Если MaxDD = 76% — значит в какой-то момент стратегия теряла 76% от пика, прежде чем восстановиться.</p></article><article id="q-cadence" class="faq-item"><h3><a href="#q-cadence" class="faq-anchor">Что такое каденс — weekly или monthly?</a></h3><p><strong>Каденс</strong> — как часто стратегия принимает решения и кладёт деньги.</p>
+  <section class="faq-hero">
+    <div>
+      <span class="faq-eyebrow">DCA Matrix · база знаний</span>
+      <h1>База знаний</h1>
+      <p class="faq-lede">Если хотите вложиться на 5+ лет и не дёргать счёт каждый день — здесь разобрано простыми словами, что такое DCA, как читать матрицу и какая стратегия что делает.</p>
+    </div>
+  </section>
+  <div class="faq-main">
+    <nav class="faq-toc" aria-label="Table of contents"><p class="faq-toc-title">Разделы</p><ul><li><a href="#sec-basics"><span>Основы</span><strong>8</strong></a></li><li><a href="#sec-metrics"><span>Метрики</span><strong>9</strong></a></li><li><a href="#sec-strategies"><span>Стратегии</span><strong>19</strong></a></li><li><a href="#sec-methodology"><span>Методология</span><strong>6</strong></a></li><li><a href="#sec-practice"><span>Практика</span><strong>5</strong></a></li></ul></nav>
+    <div class="faq-sections"><section id="sec-basics" class="faq-section faq-section--basics"><div class="faq-section-head"><div><span class="faq-section-kicker">Секция</span><h2>Основы</h2></div><span class="faq-section-count">8 Q&amp;A</span></div><article id="q-what-is-dca" class="faq-item"><h3><a href="#q-what-is-dca" class="faq-anchor">Что вообще тут происходит?</a></h3><p>Если вы хотите вложиться в крипту или акции на 5+ лет и не хотите каждый день дёргать счёт — это правильное место.</p>
+<p>Идея простая. Вместо того чтобы зайти всеми деньгами одним днём (страшно, особенно сейчас на максимумах) или пытаться угадать дно (никто не умеет) — вы покупаете актив <strong>постепенно</strong>, по чуть-чуть, по какому-нибудь правилу. Это и есть DCA — Dollar-Cost Averaging.</p>
+<p>Самое простое правило: каждую пятницу покупаете биткоина на $100. Всё. Не смотрите на цену, не читаете новости, не пытаетесь поймать момент.</p>
+<p>Но можно умнее. Например: «обычно покупаю на $100, а если биткоин упал на 30% от пика — покупаю на $300». Так вы дешевле наберёте актива на коррекциях. Чтобы это работало, нужно <strong>копить кэш в спокойные времена</strong> — иначе на падении не будет чем стрелять.</p>
+<p>Здесь собрано <strong>25 таких правил</strong>. Все протестированы на полной истории биткоина, эфира, S&amp;P 500 и NASDAQ. Видно, какое правило сколько исторически давало и с какой просадкой. Вы сравниваете и выбираете то, что вам по душе и по нервам.</p></article><article id="q-why-now" class="faq-item"><h3><a href="#q-why-now" class="faq-anchor">Почему DCA, а не «зашёл всеми деньгами и забыл»?</a></h3><p>На апрель 2026 крипта и акции снова на самых высоких ценах за всю историю (это называют ATH — all-time high). Если зайти сейчас всем капиталом одним днём, есть реальный шанс купить прямо на пике перед коррекцией -30%. Психологически это ад: год-два будете смотреть на красные цифры и переживать.</p>
+<p>DCA размывает этот риск. Часть денег зайдёт сейчас по высокой цене, часть — на следующих коррекциях по более низкой. Средняя цена покупки получится умеренной.</p>
+<p>Минус: если рынок прямо сейчас рванёт вверх и не остановится — вы заработаете меньше, чем если бы зашли всеми деньгами сразу. Это плата за «не купил всё на верхушке». Большинство людей готовы её платить.</p></article><article id="q-for-whom" class="faq-item"><h3><a href="#q-for-whom" class="faq-anchor">Это вообще для кого?</a></h3><p>DCA подходит вам, если:</p>
 <ul>
-<li><strong>Weekly</strong>: $461.54 каждую пятницу = $24k в год.</li>
-<li><strong>Monthly</strong>: $2 000 в первую пятницу месяца = те же $24k в год.</li>
+<li>Готовы вложить деньги на 5+ лет. На горизонте 1-2 года DCA работает плохо.</li>
+<li>Не хотите каждый день читать новости и угадывать рынок.</li>
+<li>Понимаете, что просадки -50% бывают, и готовы их пережить, не продавая.</li>
+<li>Не паникуете, когда видите красные цифры год или два подряд.</li>
 </ul>
-<p>Бюджет одинаковый, отличается частота. Месячный психологически проще (раз в месяц зашёл на брокера и забыл), еженедельный технически точнее (быстрее реагирует на просадки). Разница на длинной дистанции маленькая.</p></article><article id="q-buffer-cap" class="faq-item"><h3><a href="#q-buffer-cap" class="faq-anchor">Что такое buffer и cap?</a></h3><p>Многие «умные» стратегии не тратят всё каждую неделю — они <strong>копят кэш</strong>, чтобы стрельнуть им на просадках. Этот накопленный кэш называется <strong>buffer</strong> (или pool).</p>
-<p><strong>Cap</strong> ограничивает размер буфера: $12 000 максимум по умолчанию. Если стратегия накопила больше, излишек считается <strong>«forgone»</strong> — лежит на счёте без работы и в конце возвращается по номиналу.</p>
-<p>Это симулирует реальность: ты не можешь бесконечно копить кэш, в какой-то момент или потратишь его, или он будет лежать без дела.</p></article><article id="q-lump-vs-dca" class="faq-item"><h3><a href="#q-lump-vs-dca" class="faq-anchor">Чем DCA отличается от lump-sum?</a></h3><p><strong>Lump-sum</strong> = «зашёл всем сразу». Например, вместо $24k в год по $461 в неделю ты заходишь $24k одним днём.</p>
-<p>На длинной дистанции lump-sum статистически выигрывает у DCA в ~2/3 случаев — рынок чаще растёт, чем падает, поэтому раньше зашёл = больше времени на рост. Но в трети случаев lump-sum даёт катастрофу: зашёл на пике перед коррекцией.</p>
-<p>DCA — компромисс: меньше ожидаемая доходность, меньше риск «всё купил на вершине».</p>
-<p>В табличке стратегия <strong>B3 (lump at start)</strong> показывает референсную доходность чистого lump-sum для сравнения.</p></article></section><section id="sec-metrics" class="faq-section"><h2>Метрики</h2><article id="q-fpv" class="faq-item"><h3><a href="#q-fpv" class="faq-anchor">Что такое FPV?</a></h3><p><strong>FPV</strong> = Final Portfolio Value, итоговая стоимость портфеля в конце периода.</p>
-<p>Включает три части: цена актива × количество купленных штук + неиспользованный кэш в буфере + forgone-средства (которые не уместились в cap и вернулись по номиналу).</p>
-<p>Это сумма, которую ты бы реально имел в конце.</p></article><article id="q-mm" class="faq-item"><h3><a href="#q-mm" class="faq-anchor">Что такое MM (money multiple)?</a></h3><p><strong>MM</strong> = FPV / total_deposited. Сколько раз умножился <em>весь</em> бюджет.</p>
-<p>Если ты за период вложил $24k и в конце имеешь $200k — MM = 8.33×. Это самая честная метрика «сделал бы я Х раз свои деньги», потому что считает на полный бюджет, а не только на то, что реально вложилось в актив.</p>
-<p><strong>Это главная метрика на этой странице.</strong> Когда сравниваешь стратегии — сначала смотри на MM.</p></article><article id="q-irr" class="faq-item"><h3><a href="#q-irr" class="faq-anchor">Что такое IRR?</a></h3><p><strong>IRR</strong> = Internal Rate of Return, годовая доходность.</p>
-<p>Если IRR = 30%, значит твои деньги в среднем росли на 30% в год за весь период. Это аналог «процент годовых», но учитывает что ты вкладывал не одной суммой, а постепенно.</p>
-<p>Считается математически — ищется такая ставка, при которой сумма всех твоих вложений равна итоговой стоимости (NPV = 0).</p></article><article id="q-max-dd" class="faq-item"><h3><a href="#q-max-dd" class="faq-anchor">Что такое MaxDD?</a></h3><p><strong>MaxDD</strong> = Maximum Drawdown, максимальная просадка эквити-кривой за период.</p>
-<p>Считается так: для каждого момента времени смотрим максимум, до которого портфель доходил ранее, и сравниваем с текущим. Самое большое падение — это и есть MaxDD.</p>
-<p>Если MaxDD = 76% — значит в худший момент периода ты бы видел падение портфеля на три четверти от пика. Это про <em>эмоциональный риск</em>, не про итоговую доходность.</p></article><article id="q-irr-maxdd" class="faq-item"><h3><a href="#q-irr-maxdd" class="faq-anchor">Что такое IRR/MaxDD?</a></h3><p>Это <strong>risk-adjusted return</strong>: годовая доходность, делённая на максимальную просадку.</p>
-<p>Идея: стратегия с IRR 50% и просадкой 80% не лучше стратегии с IRR 25% и просадкой 25% — у второй та же «доходность на единицу боли».</p>
-<p>Чем выше IRR/MaxDD, тем комфортнее было бы держать стратегию. На странице есть отдельный rank по этой метрике.</p></article><article id="q-invested" class="faq-item"><h3><a href="#q-invested" class="faq-anchor">Что такое Invested?</a></h3><p><strong>Invested</strong> = сколько денег стратегия реально потратила на покупку актива за период.</p>
-<p>Если бюджет был $224k, а Invested = $87k — стратегия купила актива только на $87k, остальные $137k лежали в кэше или были forgone.</p>
-<p>Это контекст, не победа. Низкий Invested при высоком MM = «я мало вложил, но что вложил — удачно выросло». Высокий Invested при низком MM = «я всё вложил, но не выросло».</p></article><article id="q-fpv-invested" class="faq-item"><h3><a href="#q-fpv-invested" class="faq-anchor">Что значит «рост на купленное» (FPV / invested)?</a></h3><p>Это вторичная метрика: рост <em>только</em> реально вложенной части. <strong>Может быть очень обманчивой.</strong></p>
-<p>Пример: Value Averaging на BTC показывает FPV/invested = <strong>23.5×</strong>. Звучит как магия. Но это потому что стратегия из $224k бюджета реально вложила только $41k. Эти $41k удачно выросли в $964k. Остальные $183k всё это время лежали в кэше.</p>
-<p>На <em>весь бюджет</em> та же стратегия даёт MM = 4.30× — то есть $224k превратились в $964k. Это уже не магия, это просто нормальный рост.</p>
-<p>Эффект маленького знаменателя: если делишь на маленькую сумму, любой рост выглядит огромным. Поэтому на сайте основная метрика — MM на gross.</p></article><article id="q-risk-score" class="faq-item"><h3><a href="#q-risk-score" class="faq-anchor">Что значит Risk 1–5?</a></h3><p>Это упрощённая категория риска, выведенная из MaxDD:</p>
+<p>DCA <strong>не подходит</strong>, если:</p>
 <ul>
-<li><strong>1</strong>: MaxDD < 25% (комфортная)</li>
-<li><strong>2</strong>: 25–40%</li>
-<li><strong>3</strong>: 40–55%</li>
-<li><strong>4</strong>: 55–70%</li>
-<li><strong>5</strong>: 70%+ (только для крипто-выживших)</li>
+<li>Хотите быстро удвоиться за полгода (это не сюда).</li>
+<li>Деньги понадобятся в ближайший год (риск выйти на просадке).</li>
+<li>Эмоционально не вытянете -50% по портфелю — лучше тогда выбрать менее волатильный актив.</li>
+</ul></article><article id="q-ath" class="faq-item"><h3><a href="#q-ath" class="faq-anchor">Что значит ATH?</a></h3><p>All-time high. Самая высокая цена за всю историю актива.</p>
+<p>На апрель 2026 у биткоина ATH ≈ $109k, у S&amp;P 500 ≈ 6 100. Когда говорят «рынок на ATH», имеется в виду что прямо сейчас он стоит дороже, чем когда-либо раньше.</p>
+<p>«ATH» сам по себе ничего плохого не означает — рынки часто проводят годы на ATH, постоянно обновляя его. Но это значит, что покупать сейчас означает покупать недёшево, и просадка после ATH психологически бьёт сильнее, чем просадка из «середины».</p></article><article id="q-drawdown" class="faq-item"><h3><a href="#q-drawdown" class="faq-anchor">Что такое просадка?</a></h3><p>Насколько ваш портфель упал от своего пика. Дошли до $100k, портфель упал до $40k — просадка 60%.</p>
+<p>Это эмоциональный показатель — насколько больно держать стратегию и не продавать в панике. На крипте просадки 70-80% случаются регулярно (каждый цикл). На акциях >50% бывает раз в 10-15 лет (например, 2008 год).</p>
+<p>В табличке колонка <strong>MaxDD</strong> — самая большая просадка за весь тестовый период. Если у стратегии MaxDD = 76%, значит в худший момент вы бы видели падение портфеля на три четверти от пика. Если такое для вас неприемлемо — эту стратегию не выбирайте.</p></article><article id="q-cadence" class="faq-item"><h3><a href="#q-cadence" class="faq-anchor">Weekly или monthly — что выбрать?</a></h3><p>Это просто про частоту покупок:</p>
+<ul>
+<li><strong>Weekly</strong>: $461.54 каждую пятницу.</li>
+<li><strong>Monthly</strong>: $2 000 в первую пятницу месяца.</li>
 </ul>
-<p>Чтобы быстро сориентироваться. Для серьёзного выбора смотри на сам MaxDD в процентах.</p></article><article id="q-forgone" class="faq-item"><h3><a href="#q-forgone" class="faq-anchor">Что такое Forgone?</a></h3><p><strong>Forgone</strong> — это деньги, которые стратегия не смогла потратить, потому что буфер был переполнен (выше cap = $12k).</p>
-<p>Эти деньги в конце возвращаются инвестору по номиналу — без роста, как лежали под матрасом. Они учитываются в FPV (потому что инвестор реально их получает обратно), но обнуляют шанс эти деньги вырастить.</p>
-<p>Высокий forgone у стратегии = она часто не успевала тратить накопленный кэш, и большая часть бюджета не «работала» в активе.</p></article></section><section id="sec-strategies" class="faq-section"><h2>Стратегии</h2><article id="q-b1" class="faq-item"><h3><a href="#q-b1" class="faq-anchor">B1: Pure DCA — что это?</a></h3><p>Самая тупая стратегия. Каждую неделю $461.54 уходит в актив. Без условий, без накоплений, без сигналов.</p>
-<p>Это <strong>baseline</strong>: если умная стратегия не побила B1, значит её сложность не оправдалась. На длинной дистанции с растущим активом B1 побеждает многих, потому что не упускает рост на ожидании просадки.</p></article><article id="q-b2" class="faq-item"><h3><a href="#q-b2" class="faq-anchor">B2: Monthly Lump — что это?</a></h3><p>Та же сумма что B1, но покупаешь не каждую пятницу, а только в первую пятницу месяца — сразу $2 000.</p>
-<p>Удобнее логистически (раз в месяц перевод вместо раз в неделю). Результаты почти идентичны B1, разница в третьем знаке. Выбирай по предпочтениям, не по доходности.</p></article><article id="q-b3" class="faq-item"><h3><a href="#q-b3" class="faq-anchor">B3: Lump at start — что это?</a></h3><p>Заходишь <strong>всем</strong> бюджетом ($24k × количество лет периода) одним днём в начале и держишь до конца.</p>
-<p>Это reference для lump-sum: «как бы я заработал, если бы мог сразу всё вложить». На растущих рынках B3 побеждает все DCA-стратегии (раньше зашёл — больше времени на рост). Но на ATH с последующей коррекцией он же даёт максимальную боль.</p>
-<p>В реальности у большинства людей нет $24k × 9 лет = $216k свободных, чтобы зайти одним днём. Поэтому B3 — теоретический потолок, не реальный план.</p></article><article id="q-convex-linear-tiered" class="faq-item"><h3><a href="#q-convex-linear-tiered" class="faq-anchor">Convex / Linear / Tiered — в чём разница?</a></h3><p>Все три — стратегии «покупай больше на просадках». Отличается форма кривой: <em>сколько именно</em> покупать при просадке X%.</p>
+<p>В сумме за год получается одно и то же — $24k. Удобнее раз в месяц закидывать на брокера и забывать. Технически еженедельный чуть точнее реагирует на просадки, но разница на длинной дистанции почти незаметная. Выбирайте по тому, как вам удобнее заносить деньги.</p></article><article id="q-buffer-cap" class="faq-item"><h3><a href="#q-buffer-cap" class="faq-anchor">Почему стратегии копят кэш?</a></h3><p>Многие «умные» стратегии не тратят весь бюджет каждую неделю. Они откладывают часть в подушку (по-английски — <strong>buffer</strong>) и стреляют ей на больших коррекциях.</p>
+<p>Логика: в спокойное время купили на $200, остальные $260 откладываем. Когда биткоин падает на 50% — стратегия тратит накопленные деньги одной большой покупкой по дешёвой цене.</p>
+<p>Чтобы это работало, у вас на счёте должны лежать «лишние» деньги в кэше. Если вы хотите весь бюджет тратить сразу — выбирайте простой DCA (B1 или B2), он не копит.</p>
+<p><strong>Cap</strong> — потолок этой подушки ($12 000 по умолчанию). Если стратегия накопила больше — лишнее лежит на счёте без работы и в конце возвращается по номиналу. Это симулирует реальность: бесконечно копить невозможно.</p></article><article id="q-lump-vs-dca" class="faq-item"><h3><a href="#q-lump-vs-dca" class="faq-anchor">А lump-sum — это что?</a></h3><p>Lump-sum = «зайти всеми деньгами одним днём». Если у вас есть $24k и вы их одним днём отправляете в биткоин — это lump-sum. DCA — наоборот, «постепенно».</p>
+<p>Статистически lump-sum выигрывает у DCA в 2 случаях из 3. Рынки чаще растут, чем падают, поэтому раньше зашёл = больше времени на рост.</p>
+<p>Но в 1 случае из 3 lump-sum даёт катастрофу: вы зашли на пике перед обвалом. Например, если бы вы вложили все деньги в биткоин на пике ноября 2021 ($69k), то к концу 2022 видели бы -78%.</p>
+<p>DCA — это компромисс. Меньше прибыли в идеальном сценарии. Но никогда не «купил всё на самой верхушке».</p>
+<p>В табличке стратегия <strong>B3 (lump at start)</strong> показывает, что lump-sum дал бы исторически — для сравнения.</p></article></section><section id="sec-metrics" class="faq-section faq-section--metrics"><div class="faq-section-head"><div><span class="faq-section-kicker">Секция</span><h2>Метрики</h2></div><span class="faq-section-count">9 Q&amp;A</span></div><article id="q-fpv" class="faq-item"><h3><a href="#q-fpv" class="faq-anchor">Что такое FPV?</a></h3><p>Final Portfolio Value — сколько денег было бы в портфеле в конце тестового периода. Просто «сколько вы бы реально имели в кармане в конце».</p>
+<p>Включает три части: купленный актив × цена на конец + кэш в подушке + деньги, которые лежали в кэше и не уместились в подушку.</p></article><article id="q-mm" class="faq-item"><h3><a href="#q-mm" class="faq-anchor">Что такое MM (money multiple)?</a></h3><p>Главное число для сравнения стратегий. Сколько раз умножился <strong>весь</strong> ваш бюджет за период.</p>
+<p>Положили $24k за период, в конце $200k → MM = 8.33×.</p>
+<p>Это самая честная метрика «во сколько раз я бы умножил свои деньги», потому что считает на полный бюджет, а не только на ту часть, что реально вложилась в актив.</p>
+<p>Сравниваете стратегии — смотрите на MM в первую очередь.</p></article><article id="q-irr" class="faq-item"><h3><a href="#q-irr" class="faq-anchor">Что такое IRR?</a></h3><p>Annual return — годовая доходность. Если IRR = 30%, ваши деньги в среднем росли на 30% в год за весь период.</p>
+<p>Это аналог обычного «процент годовых», но учитывает, что вы вкладывали постепенно, а не одной суммой.</p></article><article id="q-max-dd" class="faq-item"><h3><a href="#q-max-dd" class="faq-anchor">Что такое MaxDD?</a></h3><p>Maximum drawdown — максимальная просадка за весь тестовый период. Если в какой-то момент портфель потерял 76% от своего пика, это MaxDD = 76%.</p>
+<p>Это про эмоциональный риск, не про итоговую доходность. Помогает оценить «насколько было бы больно держать эту стратегию и не паниковать».</p></article><article id="q-irr-maxdd" class="faq-item"><h3><a href="#q-irr-maxdd" class="faq-anchor">Что такое IRR/MaxDD?</a></h3><p>Доходность, делённая на просадку. По-английски это называют risk-adjusted return.</p>
+<p>Идея: стратегия с 50% годовых и 80% просадкой не лучше стратегии с 25% годовых и 25% просадкой — у второй та же «прибыль на единицу боли». Чем больше IRR/MaxDD, тем комфортнее было бы держать стратегию.</p></article><article id="q-invested" class="faq-item"><h3><a href="#q-invested" class="faq-anchor">Что такое Invested?</a></h3><p>Сколько денег стратегия реально потратила на покупку актива за период.</p>
+<p>Если бюджет был $224k, а Invested = $87k — стратегия купила актив только на $87k. Остальные $137k лежали в кэше или возвращены инвестору в конце.</p>
+<p>Это контекст. Не «победа» и не «проигрыш». Низкий Invested + высокий MM = «мало вложил, удачно выросло». Высокий Invested + низкий MM = «всё вложил, не выросло».</p></article><article id="q-fpv-invested" class="faq-item"><h3><a href="#q-fpv-invested" class="faq-anchor">А «рост на купленное» — это что и почему ему нельзя верить?</a></h3><p>Это вторичная метрика — насколько выросла <em>только</em> реально вложенная часть. Может быть очень обманчивой.</p>
+<p>Пример. Стратегия Value Averaging на биткоине показывает рост на купленное = <strong>23.5×</strong>. Звучит магически. Но это потому что стратегия из $224k бюджета вложила всего $41k. Эти $41k удачно выросли в $964k. Остальные $183k всё это время лежали в кэше.</p>
+<p>А на полный бюджет та же стратегия даёт MM = 4.30×. Получается $224k превратились в $964k — нормальный рост, не магия.</p>
+<p>Эффект маленького знаменателя. Если делить на маленькую сумму, любой рост выглядит огромным. Поэтому ориентируйтесь на MM, а не на FPV/invested.</p></article><article id="q-risk-score" class="faq-item"><h3><a href="#q-risk-score" class="faq-anchor">Что значит Risk 1-5?</a></h3><p>Упрощённая категория риска по уровню MaxDD:</p>
 <ul>
-<li><strong>Linear</strong>: размер покупки растёт прямо пропорционально глубине просадки. Просадка 25% → купи 1.5×. Просадка 50% → 2×.</li>
-<li><strong>Convex</strong>: вогнутая, ускоряющаяся кривая. На мелких просадках почти не реагирует, на больших — стреляет агрессивно. Гипотеза: глубокие просадки = лучшие моменты для входа.</li>
-<li><strong>Tiered</strong>: ступеньки. Просадка <30% → 1×, 30-50% → 2×, 50-70% → 4×, 70+% → 5×. Дискретная версия convex.</li>
+<li><strong>1</strong>: меньше 25% просадки (комфортная)</li>
+<li><strong>2</strong>: 25-40% (терпимая)</li>
+<li><strong>3</strong>: 40-55% (нервная)</li>
+<li><strong>4</strong>: 55-70% (для крипто-выживших)</li>
+<li><strong>5</strong>: 70%+ (только для тех, кто выдержит «всё пропало»)</li>
 </ul>
-<p>Все три копят buffer, чтобы было что тратить, когда сигнал сработает.</p></article><article id="q-concave" class="faq-item"><h3><a href="#q-concave" class="faq-anchor">Concave — это противоположность convex?</a></h3><p>Да. Convex говорит «покупай на больших просадках», concave говорит «покупай на маленьких просадках, дальше не разгоняйся».</p>
-<p>Гипотеза: средняя реверсия сильнее всего на мелких откатах (5-10%), а большие просадки — это уже структурный кризис, не оправданные покупки.</p>
-<p>На бычьих рынках concave даёт неплохие результаты, потому что мелкие откаты часто и быстро восстанавливаются. На медвежьих проигрывает convex.</p></article><article id="q-52w-vs-ath" class="faq-item"><h3><a href="#q-52w-vs-ath" class="faq-anchor">52w vs ATH — что лучше?</a></h3><p>Это <strong>от какой цены считается просадка</strong>:</p>
+<p>Чтобы быстро отсечь стратегии, которые точно не подходят. Для серьёзного выбора смотрите на сам MaxDD в процентах.</p></article><article id="q-forgone" class="faq-item"><h3><a href="#q-forgone" class="faq-anchor">Что такое Forgone?</a></h3><p>Деньги, которые стратегия не смогла потратить, потому что подушка переполнилась (выше потолка $12k).</p>
+<p>Эти деньги в конце возвращаются вам по номиналу — без роста, как лежали под матрасом. Они учтены в FPV (вы реально их получили), но они <strong>не выросли в активе</strong>.</p>
+<p>Высокий forgone у стратегии = она часто не успевала тратить накопленный кэш, и большая часть бюджета просто не «работала».</p></article></section><section id="sec-strategies" class="faq-section faq-section--strategies"><div class="faq-section-head"><div><span class="faq-section-kicker">Секция</span><h2>Стратегии</h2></div><span class="faq-section-count">19 Q&amp;A</span></div><article id="q-b1" class="faq-item"><h3><a href="#q-b1" class="faq-anchor">B1: Pure DCA — что делает?</a></h3><p>Самая простая стратегия. Каждую неделю $461.54 уходит в актив. Без условий, без сигналов, без копилок.</p>
+<p>На длинной дистанции с растущим активом часто побеждает многих «умных» стратегий, потому что не упускает рост, ожидая просадку. Это базовая точка для сравнения: если умная стратегия не побила B1, её сложность не оправдалась.</p>
+<p>Если вы первый раз делаете DCA — начните отсюда. Простое работает.</p></article><article id="q-b2" class="faq-item"><h3><a href="#q-b2" class="faq-anchor">B2: Monthly Lump — что делает?</a></h3><p>То же что B1, но реже: $2 000 в первую пятницу месяца, остальные дни не покупает. Сумма за год та же — $24k.</p>
+<p>Удобнее логистически: один перевод на брокера в месяц вместо четырёх. Результаты почти идентичны B1, разница в третьем знаке.</p></article><article id="q-b3" class="faq-item"><h3><a href="#q-b3" class="faq-anchor">B3: Lump at start — что делает?</a></h3><p>Заходит всем бюджетом ($24k × количество лет периода) одним днём в начале и держит до конца.</p>
+<p>Это эталон lump-sum — «как бы я заработал, если бы мог сразу всё вложить». На растущих рынках побеждает все DCA-стратегии. Но для большинства людей нереалистична — у вас вряд ли есть $216k свободных, чтобы зайти одним днём. Это потолок, не план.</p></article><article id="q-convex-linear-tiered" class="faq-item"><h3><a href="#q-convex-linear-tiered" class="faq-anchor">Convex / Linear / Tiered — в чём разница?</a></h3><p>Все три семьи — «покупай больше на просадках». Отличается форма кривой, то есть <em>сколько именно</em> покупать при разной глубине просадки:</p>
 <ul>
-<li><strong>52w</strong>: от максимума за последние 52 недели (год). Просадка перезагружается каждый год.</li>
-<li><strong>ATH</strong>: от исторического максимума за всю историю. Просадка остаётся «глубокой», пока цена не превысит старый ATH.</li>
+<li><strong>Linear</strong>: размер покупки растёт прямо пропорционально просадке. Цена упала на 25% → покупаю в 1.5×. На 50% → в 2×.</li>
+<li><strong>Convex</strong>: вогнутая кривая. На мелких просадках почти не реагирует, на больших стреляет агрессивно. Идея: глубокие просадки — лучшие моменты для входа.</li>
+<li><strong>Tiered</strong>: ступеньки. До 30% просадки → 1×, 30-50% → 2×, 50-70% → 4×, 70%+ → 5×. Дискретная версия convex.</li>
 </ul>
-<p>На крипте после большого медвежьего рынка ATH-стратегия будет считать «просадку 60%» ещё годами, пока BTC не превзойдёт старый пик. 52w-стратегия видит только год назад → просадка может быть 0%, даже если ATH далеко.</p></article><article id="q-value-averaging" class="faq-item"><h3><a href="#q-value-averaging" class="faq-anchor">Value Averaging — как работает?</a></h3><p>Идея: ты задаёшь себе <strong>целевую траекторию роста портфеля</strong>. Например, «к концу года хочу иметь $24k в портфеле».</p>
-<p>Каждую неделю смотришь: текущий портфель ниже целевой линии или выше?</p>
+<p>Все три копят кэш в подушку, чтобы было что тратить, когда сигнал сработает.</p></article><article id="q-concave" class="faq-item"><h3><a href="#q-concave" class="faq-anchor">Concave — это противоположность convex?</a></h3><p>Да. Convex говорит «покупай больше на больших просадках». Concave наоборот — «покупай больше на маленьких просадках, на больших не разгоняйся».</p>
+<p>Идея: средняя реверсия (откат после движения) сильнее всего на мелких 5-10% откатах. А большие просадки — это уже структурный кризис, и докупаться там опасно.</p>
+<p>На бычьих рынках concave работает хорошо, на медвежьих проигрывает convex.</p></article><article id="q-52w-vs-ath" class="faq-item"><h3><a href="#q-52w-vs-ath" class="faq-anchor">52w vs ATH — в чём разница?</a></h3><p>Это разные способы считать «насколько актив сейчас просел»:</p>
 <ul>
-<li>Ниже: докупай, чтобы догнать. Если рынок упал — придётся докупить больше.</li>
-<li>Выше: не покупай, пусть buffer копится.</li>
+<li><strong>52w</strong>: считаем от максимума за последний год. Каждый год отсчёт обнуляется.</li>
+<li><strong>ATH</strong>: считаем от исторического максимума за всю историю.</li>
 </ul>
-<p>Парадокс: на BTC стратегия рано покупает мало, BTC сильно вырастает, и дальше стратегия годами ничего не покупает (портфель уже выше целевой линии). В итоге $41k реально вложено из $224k бюджета.</p></article><article id="q-above-below-sma200" class="faq-item"><h3><a href="#q-above-below-sma200" class="faq-anchor">Above-SMA200 / Below-SMA200 — что это?</a></h3><p><strong>SMA200</strong> = средняя цена за последние 200 дней. Классический индикатор тренда.</p>
+<p>Пример. Биткоин был на ATH $69k в ноябре 2021. Упал до $15k в 2022. По 52w-метрике в середине 2024 биткоин уже не «в просадке» (за последний год было выше). По ATH-метрике он всё ещё в просадке от 2021 пика.</p>
+<p>Какой подход лучше — открытый вопрос. ATH более «памятливый» и осторожный, 52w — более реактивный.</p></article><article id="q-value-averaging" class="faq-item"><h3><a href="#q-value-averaging" class="faq-anchor">Value Averaging — как работает?</a></h3><p>Стратегия задаёт целевую траекторию роста портфеля. Например: «к концу года хочу иметь $24k в портфеле».</p>
+<p>Каждую неделю она смотрит — текущий портфель ниже целевой линии или выше:</p>
 <ul>
-<li><strong>Above-SMA200 only</strong>: покупаю только когда цена ВЫШЕ 200-дневной средней. То есть только в восходящем тренде. Не ловлю падающий нож.</li>
-<li><strong>Below-SMA200 only</strong>: покупаю только когда цена НИЖЕ 200-дневной средней. Контрарная логика — захожу только на коррекциях.</li>
-<li><strong>Below-SMA200 aggressive</strong>: то же что выше, но тратит ВЕСЬ накопленный buffer на каждом баре below-SMA200, а не ограничен per-bar cap.</li>
+<li>Ниже: докупаю столько, чтобы догнать.</li>
+<li>Выше: ничего не покупаю, кэш копится.</li>
 </ul>
-<p>На сильных бычьих рынках above выигрывает, на медвежьих below.</p></article><article id="q-bi-modal" class="faq-item"><h3><a href="#q-bi-modal" class="faq-anchor">Bi-modal (core + reserve) — что это?</a></h3><p>Стратегия с двумя ведёрками:</p>
+<p>Парадокс на биткоине: стратегия рано покупает мало, биткоин сильно растёт, и дальше стратегия годами ничего не покупает (портфель уже выше целевой линии). В итоге всего ~18% бюджета реально ушло в актив. Поэтому MM получается скромный, хотя на купленную часть выглядит дико красиво (см. вопрос про FPV/invested).</p></article><article id="q-above-below-sma200" class="faq-item"><h3><a href="#q-above-below-sma200" class="faq-anchor">Above-SMA200 / Below-SMA200 — что делают?</a></h3><p>SMA200 — средняя цена актива за последние 200 дней. Классический индикатор тренда: если цена выше SMA200, обычно говорят «тренд восходящий», ниже — «тренд нисходящий».</p>
 <ul>
-<li><strong>Core</strong> (50% депозита): уходит в актив каждую неделю как pure DCA.</li>
-<li><strong>Reserve</strong> (50% депозита): копится отдельно. Активируется ТОЛЬКО когда просадка преодолевает порог (60% для BTC, 15% для SPY) — тогда весь reserve единомоментно уходит в актив.</li>
+<li><strong>Above-SMA200 only</strong>: покупаю, только когда цена выше SMA200. То есть только в восходящем тренде. Не ловлю падающий нож.</li>
+<li><strong>Below-SMA200 only</strong>: покупаю, только когда цена ниже SMA200. Контрарная логика — захожу только на коррекциях.</li>
+<li><strong>Below-SMA200 aggressive</strong>: то же что Below, но тратит весь накопленный кэш на каждом таком баре, без ограничения.</li>
 </ul>
-<p>Идея: половина бюджета работает всегда, вторая половина ждёт катастрофы и закупается на дне.</p></article><article id="q-vol-scaled" class="faq-item"><h3><a href="#q-vol-scaled" class="faq-anchor">Vol-scaled — что это?</a></h3><p>Покупаешь обратно пропорционально <strong>волатильности</strong>: чем спокойнее рынок, тем больше; чем безумнее, тем меньше.</p>
-<p>Гипотеза: высокая волатильность = непредсказуемость, лучше переждать. Низкая = тренд устойчив, можно докинуть. Размер автоматически нормализуется так, чтобы в среднем тратилось ровно $461 в неделю.</p></article><article id="q-wow-linear" class="faq-item"><h3><a href="#q-wow-linear" class="faq-anchor">WoW-linear — что это?</a></h3><p>WoW = Week-over-Week, неделя к неделе. Если цена за прошлую неделю упала на 5% — покупаешь в 1.5×. Выросла — в 0.5×.</p>
-<p>Простая краткосрочная контрарная стратегия. Хорошо ловит мелкие откаты, но не пытается читать «большую» просадку — реагирует только на свежее движение.</p></article><article id="q-momentum-rev" class="faq-item"><h3><a href="#q-momentum-rev" class="faq-anchor">Momentum reversion — что это?</a></h3><p>«Прошлая неделя красная — покупаю больше, прошлая зелёная — меньше.»</p>
-<p>Та же идея что WoW-linear, но с фиксированными суммами: 500/300/200 баксов в зависимости от знака. На длинных трендах проигрывает (не ловит рост), на пилах выигрывает.</p></article><article id="q-below-200wma" class="faq-item"><h3><a href="#q-below-200wma" class="faq-anchor">Below-200WMA only — что это?</a></h3><p>То же что Below-SMA200, но порог считается через <strong>взвешенное</strong> 200-недельное скользящее среднее (200WMA). Это мощный индикатор «BTC дешёвый» — исторически BTC редко проводит время ниже своей 200WMA, и эти периоды совпадают с лучшими моментами для покупки.</p>
-<p>Стратегия копит кэш долго, потом за раз вкатывает на BTC, когда уходит ниже 200WMA. На графике видно, что это происходит редко (раз в 2-4 года).</p></article><article id="q-halving-cycle" class="faq-item"><h3><a href="#q-halving-cycle" class="faq-anchor">Halving cycle aware — что это?</a></h3><p>BTC halving — событие раз в ~4 года, когда награда майнерам уменьшается вдвое. Исторически связано с циклом цены: после halving идёт бычий рост (~12-18 месяцев), потом топ, потом медвежий рынок, потом восстановление перед следующим halving.</p>
-<p>Стратегия меняет размер покупки в зависимости от месяцев после последнего halving:</p>
+<p>На сильных бычьих рынках Above выигрывает, на медвежьих — Below.</p></article><article id="q-bi-modal" class="faq-item"><h3><a href="#q-bi-modal" class="faq-anchor">Bi-modal (core + reserve) — что делает?</a></h3><p>Стратегия с двумя ведёрками:</p>
 <ul>
-<li>0-6 мес: 1× (рано, накапливаем)</li>
-<li>6-18 мес: 1.5× (бычий старт)</li>
-<li>18-30 мес: 0.5× (топ, осторожно)</li>
-<li>30-48 мес: 2× (медвежий, дешёвые цены)</li>
-</ul></article><article id="q-pi-cycle" class="faq-item"><h3><a href="#q-pi-cycle" class="faq-anchor">Pi Cycle Top avoidance — что это?</a></h3><p>Pi Cycle Top — индикатор, который исторически очень точно угадывал вершины BTC: когда 111-дневная скользящая средняя пересекает 350-дневную × 2 снизу вверх, BTC обычно близок к топу цикла.</p>
-<p>Стратегия: пока сигнала нет, работает как pure DCA. Когда сигнал срабатывает — пауза 4 недели (не покупаем). Защита от покупки прямо на пике.</p>
-<p>На BTC stress_b за 9 лет сигнал срабатывал 2-3 раза, и каждый раз действительно перед коррекцией.</p></article><article id="q-mvrv-nupl-mayer" class="faq-item"><h3><a href="#q-mvrv-nupl-mayer" class="faq-anchor">MVRV / NUPL / Mayer Multiple — что это?</a></h3><p>Все три — <strong>on-chain метрики</strong> для крипты, считаются по данным блокчейна.</p>
-<ul>
-<li><strong>MVRV Z-Score</strong>: насколько BTC переоценён относительно «справедливой» цены. Z &lt; 0 → капитуляция, Z &gt; 7 → пузырь.</li>
-<li><strong>NUPL</strong>: какая доля держателей в плюсе. NUPL ≥ 0.75 → эйфория (топ), NUPL &lt; 0 → паника (дно).</li>
-<li><strong>Mayer Multiple</strong>: цена / 200-дневная средняя. MM &lt; 0.8 → «дешёво», MM &gt; 2.4 → «дорого».</li>
+<li><strong>Core (50% депозита)</strong>: уходит в актив каждую неделю как обычный DCA.</li>
+<li><strong>Reserve (50% депозита)</strong>: копится отдельно, ждёт катастрофы. Активируется только когда просадка превышает порог (60% для биткоина, 15% для S&amp;P) — тогда весь reserve единомоментно уходит в актив.</li>
 </ul>
-<p>Все три используются как множители: чем «дешевле» по индикатору, тем больше покупка. Только для BTC и ETH.</p></article><article id="q-200wma-heatmap" class="faq-item"><h3><a href="#q-200wma-heatmap" class="faq-anchor">200WMA Heatmap — что это?</a></h3><p>Аналог Mayer Multiple, но через 200-<em>недельное</em> взвешенное среднее. Bitcoin Investor Tool на популярных сайтах рисует это как тепловую карту цвета.</p>
-<p>r = price / 200WMA. r &lt; 1 → 3× (дешёво), 1.0-1.5 → 2×, 1.5-3.0 → 1×, 3.0-5.0 → 0.5× (дорого), &gt; 5.0 → 0× (пузырь, не покупаем).</p></article><article id="q-eth-btc-merge" class="faq-item"><h3><a href="#q-eth-btc-merge" class="faq-anchor">ETH/BTC ratio / Merge regime — что это?</a></h3><p><strong>ETH/BTC ratio gated</strong> (только для ETH): покупаешь больше ETH, когда он дешёв относительно BTC. Сравнивается ETH/BTC ratio с его 200-недельной медианой.</p>
-<p><strong>Merge regime</strong> (только для ETH): отдельная калибровка до и после The Merge (15 сен 2022, переход ETH на Proof-of-Stake). До-Merge и пост-Merge — разные режимы рынка, с разными порогами Mayer.</p></article><article id="q-vix-cape-yield" class="faq-item"><h3><a href="#q-vix-cape-yield" class="faq-anchor">VIX / CAPE / Yield curve — что это?</a></h3><p>Все три — макро-индикаторы для акций.</p>
+<p>Идея: половина бюджета работает всегда, вторая половина ждёт большой коррекции и выкупает дно.</p></article><article id="q-vol-scaled" class="faq-item"><h3><a href="#q-vol-scaled" class="faq-anchor">Vol-scaled — что делает?</a></h3><p>Покупает обратно пропорционально волатильности. Чем спокойнее рынок — тем больше; чем безумнее, тем меньше.</p>
+<p>Идея: высокая волатильность = непредсказуемость, лучше переждать. Низкая = тренд устойчив, можно докидывать. Размер автоматически нормализуется так, чтобы в среднем тратилось ровно $461 в неделю.</p></article><article id="q-wow-linear" class="faq-item"><h3><a href="#q-wow-linear" class="faq-anchor">WoW-linear — что делает?</a></h3><p>WoW = Week-over-Week, неделя к неделе. Простая краткосрочная контрарная стратегия:</p>
 <ul>
-<li><strong>VIX-gated</strong>: VIX (индекс волатильности) → паника на рынке. Высокий VIX → больше покупок (страх = возможность). VIX &lt; 15 → спокойствие → 0.4×; VIX &gt; 40 → паника → 2×.</li>
-<li><strong>CAPE-gated</strong>: Shiller CAPE = «P/E через 10 лет». CAPE &lt; 15 → дёшево (как в 2009), &gt; 45 → пузырь (как dotcom 2000). Множители 1.6× / 1.0× / 0.8× / 0.4× / 0.2×.</li>
-<li><strong>Yield curve aware</strong>: инверсия кривой доходности (10y &lt; 2y) исторически предсказывает рецессии за 12-18 мес. Стратегия осторожничает в инверсии, но в течение 18 мес после неё активно покупает (рынок обычно дешёвый).</li>
-</ul></article></section><section id="sec-methodology" class="faq-section"><h2>Методология</h2><article id="q-data-sources" class="faq-item"><h3><a href="#q-data-sources" class="faq-anchor">Откуда берутся данные?</a></h3><p>Цены: <strong>CoinMetrics</strong> для BTC и ETH (открытый источник, ежедневные данные с 2010 года). <strong>Yahoo Finance</strong> для S&amp;P 500 (с 1957) и NASDAQ-100 (с 1985).</p>
-<p>On-chain метрики: тоже CoinMetrics (MVRV Z-Score, NUPL).</p>
-<p>Макро: <strong>FRED</strong> (Federal Reserve) для VIX, T10Y2Y. <strong>multpl.com</strong> для Shiller CAPE.</p>
-<p>Все данные публичные и бесплатные.</p></article><article id="q-snapshot-date" class="faq-item"><h3><a href="#q-snapshot-date" class="faq-anchor">Что значит snapshot date 2026-04-24?</a></h3><p>Это последняя дата, по которую загружены данные. Все бэктесты заканчиваются именно тут. Если снапшот «устарел» — это нормально, все цифры на странице соответствуют этому моменту.</p>
-<p>Чтобы обновить, надо перезагрузить данные и пересчитать матрицу. Это разовая ручная операция, не автомат.</p></article><article id="q-test-period" class="faq-item"><h3><a href="#q-test-period" class="faq-anchor">За какой период считается?</a></h3><p>Зависит от рынка:</p>
-<ul>
-<li><strong>BTC</strong>: stress_b period — с 2017-01-01 по 2026-04-24, ~9.3 года. Покрывает 2 полных halving-цикла.</li>
-<li><strong>ETH</strong>: с 2018-01-13 (после dotcom-style краха ICO 2017) по 2026-04-24, ~8.3 года.</li>
-<li><strong>SPY</strong>: с 1999-03-10 по 2026-04-24, ~27 лет. Включает dotcom, GFC 2008, ковид, 2022.</li>
-<li><strong>NDX</strong>: с 1999-03-10 по 2026-04-24, ~27 лет.</li>
-</ul></article><article id="q-irr-calculation" class="faq-item"><h3><a href="#q-irr-calculation" class="faq-anchor">Как считается IRR?</a></h3><p>Метод Ньютона: ищется такая ставка <em>r</em>, при которой сумма всех cashflow-операций (минус депозиты, плюс терминальная стоимость) даёт 0 в текущей стоимости (NPV = 0).</p>
-<p>Считается на еженедельной частоте, потом возводится в степень 52 для годового эквивалента: IRR_annual = (1 + r_weekly)<sup>52</sup> − 1.</p></article><article id="q-trust-backtest" class="faq-item"><h3><a href="#q-trust-backtest" class="faq-anchor">Можно ли верить такому бэктесту?</a></h3><p>С оговорками — да. Что в нём есть честного:</p>
-<ul>
-<li>Используется только информация, доступная на момент решения (нет look-ahead bias)</li>
-<li>Тот же движок и логика, что и в боте — никаких ad-hoc оптимизаций под historical data</li>
-<li>Метрики считаются стандартно (IRR Newton, MaxDD от пика равно as published)</li>
-<li>Conservation invariant: сумма депозитов = сумма потраченного + остаток в кэше + forgone</li>
+<li>Прошлая неделя цена упала на 5% → покупаю в 1.5×.</li>
+<li>Прошлая неделя выросла → покупаю в 0.5×.</li>
 </ul>
-<p>Что НЕ учтено: комиссии брокера (обычно 0.1-1%), spread (для крипты ощутим), налоги, slippage на больших объёмах. Это уменьшит реальную доходность на 1-3% годовых. Не катастрофа, но имей в виду.</p></article><article id="q-data-snooping" class="faq-item"><h3><a href="#q-data-snooping" class="faq-anchor">А может, стратегии «подобраны» под историю?</a></h3><p>Хороший вопрос. <strong>Data snooping</strong> — когда ты тестируешь 1000 стратегий, выбираешь top-3 и говоришь «вот они, замечательные». На самом деле это просто шум.</p>
-<p>Здесь 25 стратегий взяты из публичных идей (классический DCA, Mayer Multiple, Pi Cycle, MVRV — это всё из учебников и крипто-блогов). Никто не калибровал параметры на текущей истории. Множители и пороги — это в основном «круглые числа из спецификации».</p>
-<p>Но даже так — out-of-sample-тест, на следующих 9 годах, показал бы другие числа. Прошлое НЕ предсказывает будущее. Это исследование «что бы получилось», не прогноз «что будет».</p></article></section><section id="sec-practice" class="faq-section"><h2>Практика</h2><article id="q-financial-advice" class="faq-item"><h3><a href="#q-financial-advice" class="faq-anchor">Это финансовый совет?</a></h3><p><strong>Нет.</strong> Это исследовательский проект.</p>
-<p>Я не лицензированный финансовый консультант, не знаю твоих финансовых обстоятельств, не несу ответственности за твои решения. Делай свои выводы. Если планируешь вкладывать значимые деньги — поговори с настоящим консультантом.</p></article><article id="q-how-to-choose" class="faq-item"><h3><a href="#q-how-to-choose" class="faq-anchor">Как выбрать стратегию из 25?</a></h3><p>Шаги:</p>
+<p>Не пытается читать «большие» просадки, реагирует только на свежее движение. Хорошо ловит мелкие откаты.</p></article><article id="q-momentum-rev" class="faq-item"><h3><a href="#q-momentum-rev" class="faq-anchor">Momentum reversion — что делает?</a></h3><p>«Прошлая неделя красная — покупаю больше, прошлая зелёная — меньше». Та же идея что WoW-linear, но с фиксированными суммами: $500 / $300 / $200 в зависимости от знака.</p>
+<p>На длинных трендах проигрывает (не ловит рост), на пилообразном движении выигрывает.</p></article><article id="q-below-200wma" class="faq-item"><h3><a href="#q-below-200wma" class="faq-anchor">Below-200WMA only — что делает?</a></h3><p>То же что Below-SMA200, но порог считается через <strong>200-недельное</strong> взвешенное среднее (не 200-дневное).</p>
+<p>Это сильный индикатор «биткоин дешёвый» — исторически биткоин редко проводит время ниже своей 200-недельной средней, и эти моменты совпадают с лучшими точками для покупки.</p>
+<p>Стратегия копит кэш долго (большую часть времени биткоин выше 200WMA), потом за раз вкатывает на биткоин, когда цена уходит ниже. На графике видно: это происходит редко, раз в 2-4 года.</p></article><article id="q-halving-cycle" class="faq-item"><h3><a href="#q-halving-cycle" class="faq-anchor">Halving cycle aware — что делает?</a></h3><p>Биткоин-халвинг — событие раз в ~4 года, когда награда майнерам уменьшается вдвое. Исторически связано с циклом цены: после халвинга идёт бычий рост (12-18 месяцев), потом топ, потом медвежий рынок, потом восстановление перед следующим халвингом.</p>
+<p>Стратегия меняет размер покупки в зависимости от того, сколько месяцев прошло с последнего халвинга:</p>
+<ul>
+<li>0-6 месяцев: 1× (рано, накапливаем)</li>
+<li>6-18 месяцев: 1.5× (бычий старт, докидываем)</li>
+<li>18-30 месяцев: 0.5× (топ, осторожно)</li>
+<li>30-48 месяцев: 2× (медвежий, дешёвые цены)</li>
+</ul>
+<p>Только для биткоина (у других активов халвингов нет).</p></article><article id="q-pi-cycle" class="faq-item"><h3><a href="#q-pi-cycle" class="faq-anchor">Pi Cycle Top avoidance — что делает?</a></h3><p>Pi Cycle Top — индикатор, который исторически очень точно угадывал вершины биткоина. Когда 111-дневная средняя пересекает 350-дневную × 2 снизу вверх — биткоин обычно близок к топу цикла.</p>
+<p>Стратегия: пока сигнала нет, работает как обычный DCA. Когда сигнал срабатывает — пауза 4 недели, не покупает. Защита от покупки прямо на пике.</p>
+<p>На 9-летнем тесте сигнал срабатывал 2-3 раза, и каждый раз действительно перед коррекцией.</p></article><article id="q-mvrv-nupl-mayer" class="faq-item"><h3><a href="#q-mvrv-nupl-mayer" class="faq-anchor">MVRV / NUPL / Mayer Multiple — что это?</a></h3><p>Все три — индикаторы для крипты, которые показывают «дорого ли сейчас»:</p>
+<ul>
+<li><strong>MVRV Z-Score</strong>: насколько биткоин переоценён относительно «справедливой» цены. Z &lt; 0 → дёшево, Z &gt; 7 → пузырь.</li>
+<li><strong>NUPL</strong>: какая доля держателей сейчас в плюсе. NUPL ≥ 0.75 → эйфория (топ), NUPL &lt; 0 → паника (дно).</li>
+<li><strong>Mayer Multiple</strong>: цена / 200-дневная средняя. &lt; 0.8 → дёшево, &gt; 2.4 → дорого.</li>
+</ul>
+<p>Все три используются как множители: чем дешевле по индикатору, тем больше покупка. Только для биткоина и эфира — на акциях этих метрик нет.</p></article><article id="q-200wma-heatmap" class="faq-item"><h3><a href="#q-200wma-heatmap" class="faq-anchor">200WMA Heatmap — что делает?</a></h3><p>Аналог Mayer Multiple, но через 200-<em>недельное</em> среднее. На популярных сайтах рисуется как тепловая карта (отсюда «heatmap» в названии).</p>
+<p>Соотношение r = цена / 200WMA:</p>
+<ul>
+<li>r &lt; 1 → 3× (дёшево)</li>
+<li>1.0-1.5 → 2×</li>
+<li>1.5-3.0 → 1×</li>
+<li>3.0-5.0 → 0.5× (дорого)</li>
+<li>&gt; 5.0 → 0× (пузырь, не покупаем)</li>
+</ul></article><article id="q-eth-btc-merge" class="faq-item"><h3><a href="#q-eth-btc-merge" class="faq-anchor">ETH/BTC ratio / Merge regime — что это?</a></h3><p>Обе только для эфира.</p>
+<p><strong>ETH/BTC ratio gated</strong>: покупает больше эфира, когда он дешёв относительно биткоина. Сравнивает текущее соотношение ETH/BTC с медианой за последние 200 недель.</p>
+<p><strong>Merge regime</strong>: отдельная калибровка до и после The Merge (15 сентября 2022, переход эфира на Proof-of-Stake). До и после — разные режимы рынка с разными порогами.</p></article><article id="q-vix-cape-yield" class="faq-item"><h3><a href="#q-vix-cape-yield" class="faq-anchor">VIX / CAPE / Yield curve — что это?</a></h3><p>Все три — макро-индикаторы для акций:</p>
+<ul>
+<li><strong>VIX-gated</strong>: VIX называют «индекс страха». Высокий VIX = паника на рынке = больше покупок (страх = возможность). VIX &lt; 15 → 0.4×, VIX &gt; 40 → 2×.</li>
+<li><strong>CAPE-gated</strong>: Shiller CAPE = «P/E через 10 лет», классический индикатор оценки рынка. CAPE &lt; 15 → дёшево (как 2009), &gt; 45 → пузырь (как dotcom 2000).</li>
+<li><strong>Yield curve aware</strong>: инверсия кривой доходности (10-летние облигации платят меньше 2-летних) исторически предсказывает рецессии за 12-18 месяцев. Стратегия осторожничает в самой инверсии, но активно покупает в течение 18 месяцев после неё (рынок обычно дешёвый).</li>
+</ul></article></section><section id="sec-methodology" class="faq-section faq-section--methodology"><div class="faq-section-head"><div><span class="faq-section-kicker">Секция</span><h2>Методология</h2></div><span class="faq-section-count">6 Q&amp;A</span></div><article id="q-data-sources" class="faq-item"><h3><a href="#q-data-sources" class="faq-anchor">Откуда данные?</a></h3><p>Цены: <strong>CoinMetrics</strong> для биткоина и эфира (открытый источник, ежедневные данные с 2010). <strong>Yahoo Finance</strong> для S&amp;P 500 (с 1957) и NASDAQ-100 (с 1985).</p>
+<p>On-chain метрики (MVRV, NUPL): тоже CoinMetrics.</p>
+<p>Макро: <strong>FRED</strong> (Federal Reserve) для VIX и кривой доходности. <strong>multpl.com</strong> для Shiller CAPE.</p>
+<p>Все данные публичные и бесплатные.</p></article><article id="q-snapshot-date" class="faq-item"><h3><a href="#q-snapshot-date" class="faq-anchor">Что значит snapshot date 2026-04-24?</a></h3><p>Это последняя дата, по которую загружены данные. Все бэктесты заканчиваются именно тут. Если выглядит «устарело» — это нормально, все цифры на странице соответствуют этому моменту.</p>
+<p>Чтобы обновить, надо перезагрузить данные и пересчитать матрицу. Делается вручную, не автомат.</p></article><article id="q-test-period" class="faq-item"><h3><a href="#q-test-period" class="faq-anchor">На каком периоде считается?</a></h3><p>Зависит от рынка:</p>
+<ul>
+<li><strong>BTC</strong>: с 2017-01-01 по сегодня (~9 лет). Покрывает 2 полных halving-цикла.</li>
+<li><strong>ETH</strong>: с 2018-01-13 по сегодня (~8 лет).</li>
+<li><strong>SPY (S&amp;P 500)</strong>: с 1999-03-10 по сегодня (~27 лет). Включает dotcom 2000, кризис 2008, ковид 2020, медвежку 2022.</li>
+<li><strong>NDX (NASDAQ-100)</strong>: с 1999-03-10 по сегодня (~27 лет).</li>
+</ul></article><article id="q-irr-calculation" class="faq-item"><h3><a href="#q-irr-calculation" class="faq-anchor">Как считается IRR?</a></h3><p>Метод Ньютона ищет такую годовую ставку, при которой сумма всех ваших вложений равна итоговой стоимости портфеля. Считается на еженедельной частоте, потом возводится в степень 52 для годового эквивалента.</p>
+<p>По-простому: «средняя годовая доходность с учётом того, что вы вкладывали постепенно».</p></article><article id="q-trust-backtest" class="faq-item"><h3><a href="#q-trust-backtest" class="faq-anchor">Можно ли верить такому бэктесту?</a></h3><p>С оговорками — да.</p>
+<p>Что в нём есть честного:</p>
+<ul>
+<li>Используется только информация, доступная на момент решения. Стратегия не «знает будущее».</li>
+<li>Тот же движок, что и в реальном боте. Никаких подкруток под историю.</li>
+<li>Метрики считаются стандартно.</li>
+<li>Каждый доллар учтён: бюджет = потрачено + кэш + возврат в конце.</li>
+</ul>
+<p>Что <strong>не учтено</strong>: комиссии брокера (обычно 0.1-1%), spread (для крипты ощутим), налоги, проскальзывание на больших объёмах. На реальной доходности это съест 1-3% годовых. Не катастрофа, но имейте в виду.</p></article><article id="q-data-snooping" class="faq-item"><h3><a href="#q-data-snooping" class="faq-anchor">А может, стратегии «подобраны» под историю?</a></h3><p>Хороший вопрос. По-английски это называют data snooping — когда тестируют 1000 стратегий, выбирают top-3 и говорят «вот они, прекрасные». На самом деле это просто шум, и на следующих 9 годах эти top-3 могут оказаться обычными.</p>
+<p>Здесь 25 стратегий взяты из публичных идей (классический DCA, Mayer Multiple, Pi Cycle, MVRV — всё из учебников и крипто-блогов). Никто не калибровал параметры под текущие данные. Множители и пороги — в основном «круглые числа из спецификации».</p>
+<p>Но даже так — out-of-sample тест на следующих 9 годах показал бы другие числа. <strong>Прошлое не предсказывает будущее.</strong> Это исследование «что бы получилось», не прогноз «что будет».</p></article></section><section id="sec-practice" class="faq-section faq-section--practice"><div class="faq-section-head"><div><span class="faq-section-kicker">Секция</span><h2>Практика</h2></div><span class="faq-section-count">5 Q&amp;A</span></div><article id="q-financial-advice" class="faq-item"><h3><a href="#q-financial-advice" class="faq-anchor">Это финансовый совет?</a></h3><p><strong>Нет.</strong> Это исследовательский проект.</p>
+<p>Я не лицензированный финансовый консультант, не знаю ваших финансовых обстоятельств, не несу ответственности за ваши решения. Делайте свои выводы. Если планируете вкладывать значимые деньги — поговорите с настоящим консультантом.</p></article><article id="q-how-to-choose" class="faq-item"><h3><a href="#q-how-to-choose" class="faq-anchor">Как выбрать стратегию из 25?</a></h3><p>По шагам:</p>
 <ol>
-<li>Определись по риску: какую максимальную просадку ты эмоционально переживёшь? Если 30% — это твой потолок, стратегии с MaxDD &gt; 30% не смотри.</li>
-<li>Из оставшихся выбери top-3 по MM (главная метрика).</li>
-<li>Прочитай описание каждой. Если не понимаешь, что делает стратегия — не выбирай её.</li>
-<li>Среди финалистов выбери ту, чьё описание ты сможешь объяснить другу за 30 секунд. Сложные стратегии плохо переносят реальность.</li>
+<li><strong>Определитесь по риску.</strong> Какую максимальную просадку вы эмоционально переживёте? Если 30% — это потолок, стратегии с MaxDD &gt; 30% не смотрите.</li>
+<li><strong>Из оставшихся возьмите top-3 по MM</strong> (главная метрика).</li>
+<li><strong>Прочитайте описание каждой.</strong> Если не понимаете, что делает стратегия — не выбирайте её.</li>
+<li><strong>Среди финалистов выбирайте ту, чьё описание сможете объяснить другу за 30 секунд.</strong> Сложные стратегии плохо переносят реальность.</li>
 </ol>
-<p>На странице есть «Подбор по психотипу» — это интерактивный фильтр, который сужает выбор по 4-5 простым вопросам.</p></article><article id="q-what-period" class="faq-item"><h3><a href="#q-what-period" class="faq-anchor">Какой срок DCA имеет смысл?</a></h3><p>Минимум: 6-12 месяцев. Меньше — это уже не DCA, а попытка таймить рынок маленькими шагами.</p>
-<p>Оптимум: 2-4 года. На крипте надо хотя бы один halving-цикл застать. На акциях — пережить хотя бы одну рецессию.</p>
-<p>Если хочешь long-term: 5-10+ лет. Тогда выбор стратегии менее критичен — длина периода съедает разницу между «умной» и «тупой».</p></article><article id="q-real-vs-backtest" class="faq-item"><h3><a href="#q-real-vs-backtest" class="faq-anchor">Что отличает реальный DCA от симуляции?</a></h3><p>Главное отличие: <strong>дисциплина</strong>. В бэктесте стратегия покупает каждую пятницу безусловно. В реальной жизни ты пропустишь пятницу из-за работы, забудешь, или испугаешься купить во время падения.</p>
-<p>Второе: <strong>комиссии и slippage</strong>. На каждой сделке теряется 0.1-1%, на длинной дистанции это съест 1-3% годовой доходности.</p>
-<p>Третье: <strong>налоги</strong>. В большинстве стран продажа крипты или акций облагается. Бэктест считает gross, реальность — net.</p></article><article id="q-what-if-confused" class="faq-item"><h3><a href="#q-what-if-confused" class="faq-anchor">Я ничего не понял. Что делать?</a></h3><p>Если первая встреча с DCA — выбирай <strong>B1 (Pure DCA weekly)</strong> или <strong>B2 (Monthly lump)</strong>. Просто покупай актив на фиксированную сумму с регулярностью. Не пытайся сходу разобраться с MVRV или Pi Cycle.</p>
-<p>«Умные» стратегии работают, только если ты понимаешь, ЗАЧЕМ они умные. Иначе пропустишь сигнал, не отреагируешь на просадку, всё сломаешь.</p>
-<p>B1 на BTC за 9 лет давал MM ~ 8.5×. Не идеально (B3 lump давал 87×), но честно и без эмоциональных качелей.</p></article></section>
+<p>На главной странице есть «Подбор по психотипу» — интерактивный фильтр, который сужает выбор по 4-5 простым вопросам. Удобно, если матрица сразу пугает.</p></article><article id="q-what-period" class="faq-item"><h3><a href="#q-what-period" class="faq-anchor">На какой срок имеет смысл DCA?</a></h3><p><strong>Минимум</strong>: 6-12 месяцев. Меньше — это уже не DCA, а попытка таймить рынок маленькими шагами.</p>
+<p><strong>Оптимум</strong>: 2-4 года. На крипте надо хотя бы один halving-цикл застать. На акциях — пережить хотя бы одну коррекцию.</p>
+<p><strong>Long-term</strong>: 5-10+ лет. Тогда выбор стратегии менее критичен — длина периода съедает разницу между «умной» и «тупой».</p></article><article id="q-real-vs-backtest" class="faq-item"><h3><a href="#q-real-vs-backtest" class="faq-anchor">Чем реальный DCA отличается от симуляции?</a></h3><p>Главное — <strong>дисциплина</strong>. В симуляции стратегия покупает каждую пятницу безусловно. В реальной жизни вы пропустите пятницу из-за работы, забудете, или испугаетесь покупать во время падения. Большая часть проигрыша real vs backtest — отсюда.</p>
+<p>Второе: <strong>комиссии и spread</strong>. На каждой сделке теряется 0.1-1%, на длинной дистанции это съест 1-3% годовой доходности.</p>
+<p>Третье: <strong>налоги</strong>. В большинстве стран продажа крипты или акций облагается. Симуляция считает gross (до налогов), реальность — net.</p></article><article id="q-what-if-confused" class="faq-item"><h3><a href="#q-what-if-confused" class="faq-anchor">Я ничего не понял. Что делать?</a></h3><p>Если первая встреча с DCA — выбирайте <strong>B1 (Pure DCA weekly)</strong> или <strong>B2 (Monthly lump)</strong>. Просто покупайте актив на фиксированную сумму с регулярностью. Не пытайтесь сходу разобраться с MVRV или Pi Cycle.</p>
+<p>«Умные» стратегии работают, только если вы понимаете, <em>зачем</em> они умные. Иначе вы пропустите сигнал, не отреагируете на просадку, и всё сломаете.</p>
+<p>B1 на биткоине за 9 лет давал MM ~ 8.5×. Не идеально (B3 lump давал 87×), но честно и без эмоциональных качелей.</p></article></section></div>
+  </div>
   <div class="faq-footer">Прошлое не предсказывает будущее. Это исследовательский проект, не финансовый совет.</div>
 </div>
 </body>
