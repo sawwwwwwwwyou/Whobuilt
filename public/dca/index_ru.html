@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DCA Backtest Matrix — Strategy Explorer</title>
-<script>(function(){try{var p=new URL(location.href).searchParams.get('lang');if(p){localStorage.setItem('dca_lang_pref',p);return;}if(localStorage.getItem('dca_lang_pref'))return;var prefersRu=/^ru\b/.test((navigator.language||'').toLowerCase());var pageIsRu=true;if(prefersRu!==pageIsRu){location.replace('/dca/index.html'+location.hash);}}catch(e){}})();</script>
+<script>(function(){try{var p=new URL(location.href).searchParams.get('lang');if(p){localStorage.setItem('dca_lang_pref',p);}var stored=p||localStorage.getItem('dca_lang_pref');var prefersRu=stored?stored==='ru':/^ru\b/.test((navigator.language||'').toLowerCase());var pageIsRu=true;if(prefersRu!==pageIsRu){location.replace('/dca/index.html'+location.hash);}}catch(e){}})();</script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif; color: #0f172a; background: #f8fafc; line-height: 1.55; }
@@ -3188,21 +3188,44 @@ table.summary {
 <script>
 (function () {
   var KEY = 'dca_welcome_suppressed_v3';
+  var SESSION_KEY = 'dca_welcome_seen_session';
   var overlay = document.getElementById('dca-welcome');
   if (!overlay) return;
   var suppressInput = overlay.querySelector('[data-suppress]');
   function isSuppressed() {
     try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
   }
+  function isSeenThisSession() {
+    try { return sessionStorage.getItem(SESSION_KEY) === '1'; } catch (e) { return false; }
+  }
+  function markSeenThisSession() {
+    try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
+  }
   function setSuppressed() {
     try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+  function isReload() {
+    try {
+      var entry = performance.getEntriesByType('navigation')[0];
+      return entry && entry.type === 'reload';
+    } catch (e) { return false; }
+  }
+  function showOverlay() {
+    overlay.classList.add('is-open');
+    markSeenThisSession();
   }
   function close() {
     overlay.classList.remove('is-open');
     if (suppressInput && suppressInput.checked) setSuppressed();
   }
-  // Show on every load unless permanently suppressed via the checkbox.
-  if (!isSuppressed()) overlay.classList.add('is-open');
+  // Open rules (in order):
+  // - permanently suppressed (checkbox) → never open
+  // - hard reload (Cmd+R / F5) → open (resets session gate, matches user's
+  //   "every hard refresh" expectation)
+  // - already shown this session → skip (so the in-tab lang switcher and
+  //   any same-session navigation don't re-trigger the popup)
+  // - otherwise → open
+  if (!isSuppressed() && (isReload() || !isSeenThisSession())) showOverlay();
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay) close();
     if (e.target.closest && e.target.closest('[data-action="dismiss"]')) close();
