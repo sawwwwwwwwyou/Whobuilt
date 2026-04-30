@@ -3053,6 +3053,135 @@ table.summary {
 </style>
 </head>
 <body>
+<div id="dca-welcome" class="dca-welcome" role="dialog" aria-modal="true">
+<style>
+.dca-welcome {
+  position: fixed; inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  display: none; align-items: center; justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+.dca-welcome.is-open { display: flex; }
+.dca-welcome__card {
+  background: #ffffff;
+  color: #0f172a;
+  max-width: 640px;
+  width: 100%;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  border-radius: 16px;
+  padding: 36px 40px 32px;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.35);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif;
+  line-height: 1.55;
+  font-size: 15px;
+}
+.dca-welcome__card h2 {
+  font-size: 24px;
+  margin: 0 0 18px;
+  color: #0f172a;
+}
+.dca-welcome__card h3 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #475569;
+  margin: 22px 0 8px;
+  font-weight: 600;
+}
+.dca-welcome__card p { margin: 0 0 12px; color: #1e293b; }
+.dca-welcome__card ul { margin: 0 0 14px 0; padding-left: 20px; color: #1e293b; }
+.dca-welcome__card li { margin-bottom: 6px; }
+.dca-welcome__card strong { color: #0f172a; }
+.dca-welcome__card em { color: #334155; font-style: italic; }
+.dca-welcome__warning {
+  margin: 18px 0 14px !important;
+  padding: 14px 16px;
+  background: #fef3c7;
+  border-left: 3px solid #f59e0b;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.dca-welcome__disclaimer {
+  margin: 16px 0 22px !important;
+  font-size: 12px;
+  color: #64748b;
+  font-style: italic;
+}
+.dca-welcome__close {
+  display: inline-block;
+  padding: 11px 22px;
+  background: #0f172a;
+  color: #f8fafc;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s;
+}
+.dca-welcome__close:hover { background: #1e293b; }
+@media (max-width: 600px) {
+  .dca-welcome__card { padding: 28px 24px; font-size: 14px; }
+  .dca-welcome__card h2 { font-size: 20px; }
+}
+</style>
+<div class="dca-welcome__card">
+<h2>Hi! What is this?</h2>
+
+<h3>What DCA actually is</h3>
+<p>DCA = Dollar-Cost Averaging. In plain words: you buy an asset (BTC, stocks, whatever) in equal chunks at some cadence. $100 every Friday, $500 monthly, or on a trigger ("only if price dropped 10% from peak"). <strong>You don't time the market — you average over time.</strong></p>
+
+<h3>Why now</h3>
+<p>April 2026: crypto and equities are back at all-time highs. Going in all-at-once is scary; the next move could easily be down. Spreading buys across weeks dilutes the "bought the top" risk. The only question is <em>how</em> to DCA.</p>
+
+<h3>What's here</h3>
+<p>I took <strong>25 DCA strategies</strong> — from dumb "buy $461 every Friday" to "buy 4× as much when BTC is down 50% from ATH" — and ran each one through full BTC, ETH, S&amp;P 500, and NASDAQ history. 4 markets × 25 strategies × 2 cadences = 200 cells. You can see what each strategy historically yielded, its drawdown, its risk profile.</p>
+
+<h3>How to read the numbers</h3>
+<ul>
+<li><strong>MM (money multiple)</strong> — the main number. How many times your <em>entire</em> budget compounded over the period. This is the honest "would I X my money" metric.</li>
+<li><strong>IRR</strong> — annualized return.</li>
+<li><strong>MaxDD</strong> — biggest drawdown on the equity curve. How many times you'd have wanted to quit.</li>
+<li><strong>Invested</strong> — how much the strategy actually deployed. 18% means 82% of the budget sat in cash.</li>
+</ul>
+
+<p class="dca-welcome__warning">
+<strong>Heads up:</strong> if you see "growth on deployed capital" (FPV / invested) somewhere — it's a secondary metric. Value Averaging shows 23.5×, but only because it deployed $41k out of a $224k budget and that $41k happened to grow. That's <em>small-denominator math</em>, not magic. <strong>Anchor on MM.</strong>
+</p>
+
+<p class="dca-welcome__disclaimer">Past performance doesn't predict the future. This is a research project, not financial advice.</p>
+
+<button type="button" class="dca-welcome__close" data-action="dismiss">Got it, let's go</button>
+</div>
+<script>
+(function () {
+  var KEY = 'dca_welcome_dismissed_v1';
+  var overlay = document.getElementById('dca-welcome');
+  if (!overlay) return;
+  function open() { overlay.classList.add('is-open'); }
+  function close(persist) {
+    overlay.classList.remove('is-open');
+    if (persist) {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    }
+  }
+  if (!(function () { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } })()) {
+    open();
+  }
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) close(true);
+    if (e.target.closest && e.target.closest('[data-action="dismiss"]')) close(true);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close(true);
+  });
+})();
+</script>
+</div>
 <div class="app">
   <nav class="sidebar">
 
