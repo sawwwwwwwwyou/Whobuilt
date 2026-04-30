@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCA Backtest Matrix — Knowledge Base</title>
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.faq-wrap { max-width: 760px; margin: 0 auto; padding: 56px 32px 96px; }
+.faq-back {
+  display: inline-block;
+  font-size: 13px;
+  color: #1d4ed8;
+  text-decoration: none;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+.faq-back:hover { text-decoration: underline; }
+.faq-wrap h1 { font-size: 36px; margin: 0 0 8px; color: #0f172a; }
+.faq-lede { font-size: 16px; color: #475569; margin: 0 0 36px; max-width: 640px; }
+.faq-toc {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px 24px;
+  margin-bottom: 48px;
+}
+.faq-toc ul { margin: 0; padding-left: 18px; }
+.faq-toc li { margin-bottom: 4px; font-size: 14px; }
+.faq-toc a { color: #334155; text-decoration: none; }
+.faq-toc a:hover { color: #0f172a; text-decoration: underline; }
+.faq-section { margin-bottom: 56px; }
+.faq-section h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #64748b;
+  margin: 0 0 24px;
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.faq-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 22px 28px;
+  margin-bottom: 14px;
+}
+.faq-item h3 {
+  font-size: 17px;
+  margin: 0 0 10px;
+  color: #0f172a;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.faq-item h3 a { color: inherit; text-decoration: none; }
+.faq-item h3 a:hover { color: #1d4ed8; }
+.faq-item p { margin: 0 0 12px; color: #1e293b; font-size: 15px; }
+.faq-item p:last-child { margin-bottom: 0; }
+.faq-item ul, .faq-item ol { margin: 8px 0 14px; padding-left: 22px; color: #1e293b; }
+.faq-item li { margin-bottom: 6px; font-size: 15px; }
+.faq-item strong { color: #0f172a; font-weight: 600; }
+.faq-item em { color: #334155; font-style: italic; }
+.faq-item sup { font-size: 11px; vertical-align: super; }
+.faq-anchor:target,
+.faq-item:target { scroll-margin-top: 24px; }
+.faq-item:target {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+.faq-footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 13px;
+  color: #64748b;
+}
+@media (max-width: 600px) {
+  .faq-wrap { padding: 32px 20px 56px; }
+  .faq-wrap h1 { font-size: 28px; }
+  .faq-item { padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="faq-wrap">
+  <a href="/dca/index.html" class="faq-back">← To the matrix</a>
+  <h1>Knowledge base</h1>
+  <p class="faq-lede">Plain-language guide to DCA, metrics, and strategies. If you&#x27;re new here or stuck on something in the matrix, this is the right place to start.</p>
+  <nav class="faq-toc" aria-label="Table of contents"><ul><li><a href="#sec-basics">Basics</a></li><li><a href="#sec-metrics">Metrics</a></li><li><a href="#sec-strategies">Strategies</a></li><li><a href="#sec-methodology">Methodology</a></li><li><a href="#sec-practice">Practice</a></li></ul></nav>
+  <section id="sec-basics" class="faq-section"><h2>Basics</h2><article id="q-what-is-dca" class="faq-item"><h3><a href="#q-what-is-dca" class="faq-anchor">What is DCA?</a></h3><p><strong>DCA</strong> = Dollar-Cost Averaging. In plain words: you buy an asset (BTC, stocks, ETF) in equal chunks at a regular cadence.</p>
+<p>Example: every Friday you top up your brokerage with $100 and immediately buy BTC for that hundred. That's it. No timing the bottom, no waiting for the perfect moment — you just enter at equal time-spaced steps.</p>
+<p>The idea: if the market dropped, your $100 buys more BTC. If it rose, less. Over the long run the price averages out and you don't depend on luck to catch the top or bottom.</p></article><article id="q-why-now" class="faq-item"><h3><a href="#q-why-now" class="faq-anchor">Why does DCA matter right now?</a></h3><p>As of April 2026, BTC, ETH, S&amp;P 500, and NASDAQ are all back at all-time highs — most expensive in history.</p>
+<p>If you go in all-at-once, there's a real chance you bought the peak right before a -30% correction — and that's a mental hellscape. Spreading buys over 6-12 months dilutes the "bought the top" risk: part of the budget will land on corrections at lower prices.</p>
+<p>DCA doesn't make you richer in the perfect scenario (lump-sum wins there). It defends against the worst scenario — and at ATH the worst scenario is what scares people most.</p></article><article id="q-ath" class="faq-item"><h3><a href="#q-ath" class="faq-anchor">What&#x27;s ATH?</a></h3><p><strong>ATH</strong> = All-Time High. The price the asset has never exceeded historically.</p>
+<p>BTC ATH in April 2026 ≈ $109k. S&amp;P 500 ATH ≈ 6 100. When people say "the market is at ATH", they mean it's worth more right now than ever before.</p></article><article id="q-drawdown" class="faq-item"><h3><a href="#q-drawdown" class="faq-anchor">What is drawdown?</a></h3><p><strong>Drawdown</strong> = how much your portfolio fell from its peak. If you peaked at $100k and the portfolio dropped to $40k, drawdown is 60%.</p>
+<p>It's an emotional metric: how painful it would have been to hold the strategy. On crypto, 70-80% drawdowns happen regularly. On stocks &gt;50% is rare (and usually means 2008).</p>
+<p><strong>MaxDD</strong> in the table is the maximum drawdown across the whole test period. MaxDD = 76% means at the worst moment of the period the strategy lost three quarters of its peak value before recovering.</p></article><article id="q-cadence" class="faq-item"><h3><a href="#q-cadence" class="faq-anchor">What&#x27;s a cadence — weekly or monthly?</a></h3><p><strong>Cadence</strong> = how often the strategy makes decisions and deploys cash.</p>
+<ul>
+<li><strong>Weekly</strong>: $461.54 every Friday = $24k a year.</li>
+<li><strong>Monthly</strong>: $2,000 on the first Friday of the month = same $24k.</li>
+</ul>
+<p>Same budget, different frequency. Monthly is easier psychologically (one transfer per month and forget). Weekly is technically more responsive (faster reaction to drops). Difference over the long run is small.</p></article><article id="q-buffer-cap" class="faq-item"><h3><a href="#q-buffer-cap" class="faq-anchor">What are buffer and cap?</a></h3><p>Many "smart" strategies don't spend everything every week — they <strong>save cash</strong> to fire on drawdowns. That saved cash is the <strong>buffer</strong> (or pool).</p>
+<p><strong>Cap</strong> limits buffer size: $12,000 by default. Anything above is treated as <strong>"forgone"</strong> — sits idle and returns at par at the end.</p>
+<p>This simulates reality: you can't accumulate cash forever; at some point you either spend it or it just sits there.</p></article><article id="q-lump-vs-dca" class="faq-item"><h3><a href="#q-lump-vs-dca" class="faq-anchor">How does DCA differ from lump-sum?</a></h3><p><strong>Lump-sum</strong> = "go all-in at once". Instead of $24k a year as $461 weekly, you put $24k in on day one.</p>
+<p>Statistically, lump-sum beats DCA in ~2/3 of historical periods — markets rise more than they fall, so earlier-in = more time to grow. But in 1/3 of cases lump-sum is a disaster: you bought the peak right before a correction.</p>
+<p>DCA is the compromise: lower expected return, lower risk of "I bought the top".</p>
+<p>The <strong>B3 (lump at start)</strong> strategy in the table shows the reference lump-sum return for comparison.</p></article></section><section id="sec-metrics" class="faq-section"><h2>Metrics</h2><article id="q-fpv" class="faq-item"><h3><a href="#q-fpv" class="faq-anchor">What is FPV?</a></h3><p><strong>FPV</strong> = Final Portfolio Value at the end of the period.</p>
+<p>It's three parts: asset price × shares accumulated + idle cash in the buffer + forgone funds (cash that overflowed the cap and returns at par).</p>
+<p>The amount you'd actually have at the end.</p></article><article id="q-mm" class="faq-item"><h3><a href="#q-mm" class="faq-anchor">What is MM (money multiple)?</a></h3><p><strong>MM</strong> = FPV / total_deposited. How many times your <em>entire</em> budget compounded.</p>
+<p>If over the period you deposited $24k and ended up with $200k, MM = 8.33×. This is the most honest "would I X my money" metric — denominated against the full budget, not just what got deployed into the asset.</p>
+<p><strong>This is the primary metric on the page.</strong> When comparing strategies, anchor on MM.</p></article><article id="q-irr" class="faq-item"><h3><a href="#q-irr" class="faq-anchor">What is IRR?</a></h3><p><strong>IRR</strong> = Internal Rate of Return, annualized.</p>
+<p>If IRR = 30%, your money grew at an effective 30% per year over the whole period. It's the "annual percentage" equivalent that accounts for the fact that you didn't deposit a lump but rather a stream over time.</p>
+<p>Computed by solving for the rate that makes the NPV of cashflows equal to zero (Newton's method).</p></article><article id="q-max-dd" class="faq-item"><h3><a href="#q-max-dd" class="faq-anchor">What is MaxDD?</a></h3><p><strong>MaxDD</strong> = Maximum Drawdown of the equity curve.</p>
+<p>For each moment in time, look at the highest the portfolio reached previously and compare to the current. The biggest drop is MaxDD.</p>
+<p>MaxDD = 76% means at the worst point of the period you'd have seen the portfolio down three quarters from its peak. About <em>emotional risk</em>, not final return.</p></article><article id="q-irr-maxdd" class="faq-item"><h3><a href="#q-irr-maxdd" class="faq-anchor">What&#x27;s IRR/MaxDD?</a></h3><p><strong>Risk-adjusted return</strong>: annual return divided by max drawdown.</p>
+<p>The idea: a strategy at IRR 50% with 80% drawdown isn't better than IRR 25% with 25% drawdown — same "return per unit of pain".</p>
+<p>Higher IRR/MaxDD = more comfortable to hold. There's a separate ranking by this metric on the page.</p></article><article id="q-invested" class="faq-item"><h3><a href="#q-invested" class="faq-anchor">What is Invested?</a></h3><p><strong>Invested</strong> = how much money the strategy actually spent on the asset over the period.</p>
+<p>If the budget was $224k and Invested = $87k, the strategy bought only $87k worth of asset; the remaining $137k sat in cash or was forgone.</p>
+<p>Context, not victory. Low Invested + high MM = "I didn't deploy much, but what I did grew well". High Invested + low MM = "I deployed everything but it didn't grow".</p></article><article id="q-fpv-invested" class="faq-item"><h3><a href="#q-fpv-invested" class="faq-anchor">What does &quot;growth on deployed capital&quot; (FPV / invested) mean?</a></h3><p>Secondary metric: growth of <em>only</em> the actually-deployed portion. <strong>Can be very misleading.</strong></p>
+<p>Example: Value Averaging on BTC shows FPV/invested = <strong>23.5×</strong>. Sounds like magic. But that's because the strategy only deployed $41k of a $224k budget. Those $41k grew to $964k. The other $183k sat in cash the whole time.</p>
+<p>Against the <em>full</em> budget the same strategy gives MM = 4.30× — i.e., $224k turned into $964k. Not magic, just normal growth.</p>
+<p>Small-denominator effect: divide by a small number, any growth looks huge. That's why MM-on-gross is the primary metric here.</p></article><article id="q-risk-score" class="faq-item"><h3><a href="#q-risk-score" class="faq-anchor">What does Risk 1-5 mean?</a></h3><p>A simplified risk category derived from MaxDD:</p>
+<ul>
+<li><strong>1</strong>: MaxDD &lt; 25% (comfortable)</li>
+<li><strong>2</strong>: 25-40%</li>
+<li><strong>3</strong>: 40-55%</li>
+<li><strong>4</strong>: 55-70%</li>
+<li><strong>5</strong>: 70%+ (crypto-survivor only)</li>
+</ul>
+<p>Quick navigation. For real choices, look at MaxDD percentage directly.</p></article><article id="q-forgone" class="faq-item"><h3><a href="#q-forgone" class="faq-anchor">What is Forgone?</a></h3><p><strong>Forgone</strong> = money the strategy couldn't spend because the buffer overflowed (above the $12k cap).</p>
+<p>These dollars return to the investor at par at the end — no growth, like under the mattress. Counted in FPV (the investor really gets them back) but with zero chance to grow.</p>
+<p>High forgone = strategy frequently couldn't spend its accumulated cash, and a big chunk of the budget didn't "work" in the asset.</p></article></section><section id="sec-strategies" class="faq-section"><h2>Strategies</h2><article id="q-b1" class="faq-item"><h3><a href="#q-b1" class="faq-anchor">B1: Pure DCA — what is it?</a></h3><p>The simplest strategy possible. Every week $461.54 goes into the asset. No conditions, no savings, no signals.</p>
+<p>This is the <strong>baseline</strong>: if a smart strategy can't beat B1, the added complexity wasn't worth it. On the long run with a rising asset B1 beats many — it doesn't miss growth waiting for a drawdown.</p></article><article id="q-b2" class="faq-item"><h3><a href="#q-b2" class="faq-anchor">B2: Monthly Lump — what is it?</a></h3><p>Same total as B1, but you buy on the first Friday of each month — $2,000 at once instead of $461 weekly.</p>
+<p>Logistically easier (one transfer a month). Results almost identical to B1, differs in the third decimal. Choose by preference, not by return.</p></article><article id="q-b3" class="faq-item"><h3><a href="#q-b3" class="faq-anchor">B3: Lump at start — what is it?</a></h3><p>You go in with the <strong>entire</strong> budget ($24k × number of years) on day one and hold to the end.</p>
+<p>Lump-sum reference: "what would I have made if I could deploy everything at once". On rising markets B3 beats every DCA strategy (earlier in = more time to grow). At ATH followed by a correction B3 also gives maximum pain.</p>
+<p>In reality most people don't have $24k × 9 years = $216k of free cash to deploy on day one. So B3 is a theoretical ceiling, not a real plan.</p></article><article id="q-convex-linear-tiered" class="faq-item"><h3><a href="#q-convex-linear-tiered" class="faq-anchor">Convex / Linear / Tiered — what&#x27;s the difference?</a></h3><p>All three are "buy more on drawdowns" strategies. They differ in the shape of the curve: <em>how much</em> exactly to buy at drawdown X%.</p>
+<ul>
+<li><strong>Linear</strong>: buy size grows in direct proportion to drawdown depth. -25% → 1.5×. -50% → 2×.</li>
+<li><strong>Convex</strong>: convex, accelerating curve. Barely reacts to small drops, fires hard on deep ones. Hypothesis: deep drawdowns are the best entry moments.</li>
+<li><strong>Tiered</strong>: stairs. DD &lt;30% → 1×, 30-50% → 2×, 50-70% → 4×, 70+% → 5×. Discrete version of convex.</li>
+</ul>
+<p>All three accumulate a buffer so they have something to spend when the signal fires.</p></article><article id="q-concave" class="faq-item"><h3><a href="#q-concave" class="faq-anchor">Concave — opposite of convex?</a></h3><p>Yes. Convex says "buy on big drawdowns", concave says "buy on small drawdowns, don't ramp further".</p>
+<p>Hypothesis: mean reversion is strongest on small pullbacks (5-10%), and big drawdowns are structural crisis, not justified buys.</p>
+<p>On bull markets concave does well — small pullbacks correct quickly. On bear markets it loses to convex.</p></article><article id="q-52w-vs-ath" class="faq-item"><h3><a href="#q-52w-vs-ath" class="faq-anchor">52w vs ATH — which is better?</a></h3><p>It's <strong>what reference price drawdown is measured from</strong>:</p>
+<ul>
+<li><strong>52w</strong>: from the high of the last 52 weeks (year). Drawdown resets each year.</li>
+<li><strong>ATH</strong>: from the all-time historical high. Drawdown stays "deep" until the price exceeds the old ATH.</li>
+</ul>
+<p>On crypto after a big bear market, an ATH-strategy will keep seeing "60% drawdown" for years, until BTC exceeds the old peak. A 52w-strategy only looks back a year — drawdown could be 0% even with the ATH far away.</p></article><article id="q-value-averaging" class="faq-item"><h3><a href="#q-value-averaging" class="faq-anchor">Value Averaging — how does it work?</a></h3><p>Idea: you set a <strong>target growth trajectory</strong> for the portfolio. E.g., "by end of year I want $24k in portfolio".</p>
+<p>Each week: is the current portfolio below the target line, or above?</p>
+<ul>
+<li>Below: top up to catch up. If the market dropped, you'll need to top up more.</li>
+<li>Above: don't buy, let the buffer accumulate.</li>
+</ul>
+<p>The paradox: on BTC the strategy buys little early, BTC goes up massively, and after that the strategy doesn't buy for years (portfolio is already above the line). End result: $41k actually deployed out of $224k budget.</p></article><article id="q-above-below-sma200" class="faq-item"><h3><a href="#q-above-below-sma200" class="faq-anchor">Above-SMA200 / Below-SMA200 — what are they?</a></h3><p><strong>SMA200</strong> = average price over the last 200 days. Classic trend indicator.</p>
+<ul>
+<li><strong>Above-SMA200 only</strong>: buy only when price is ABOVE the 200-day average. I.e., only in an uptrend. Don't catch the falling knife.</li>
+<li><strong>Below-SMA200 only</strong>: buy only when price is BELOW the 200-day average. Contrarian — only buy on corrections.</li>
+<li><strong>Below-SMA200 aggressive</strong>: same as above, but spends the ENTIRE accumulated buffer on each below-SMA200 bar instead of being capped per-bar.</li>
+</ul>
+<p>On strong bull markets above wins; on bear, below.</p></article><article id="q-bi-modal" class="faq-item"><h3><a href="#q-bi-modal" class="faq-anchor">Bi-modal (core + reserve) — what is it?</a></h3><p>A strategy with two buckets:</p>
+<ul>
+<li><strong>Core</strong> (50% of deposit): goes into the asset every week as pure DCA.</li>
+<li><strong>Reserve</strong> (50% of deposit): accumulates separately. Activates ONLY when drawdown crosses a threshold (60% for BTC, 15% for SPY) — at which point the entire reserve is deployed at once.</li>
+</ul>
+<p>Idea: half the budget always works, the other half waits for a catastrophe and buys the bottom.</p></article><article id="q-vol-scaled" class="faq-item"><h3><a href="#q-vol-scaled" class="faq-anchor">Vol-scaled — what is it?</a></h3><p>Buy inversely proportional to <strong>volatility</strong>: the calmer the market, the more; the crazier, the less.</p>
+<p>Hypothesis: high volatility = unpredictability, better to wait. Low volatility = trend is steady, can add. Size auto-normalizes so on average exactly $461 a week is spent.</p></article><article id="q-wow-linear" class="faq-item"><h3><a href="#q-wow-linear" class="faq-anchor">WoW-linear — what is it?</a></h3><p>WoW = Week-over-Week. If price dropped 5% last week, buy 1.5×. If it rose, buy 0.5×.</p>
+<p>A simple short-term contrarian strategy. Catches small pullbacks well, but doesn't try to read "big" drawdowns — only reacts to the latest move.</p></article><article id="q-momentum-rev" class="faq-item"><h3><a href="#q-momentum-rev" class="faq-anchor">Momentum reversion — what is it?</a></h3><p>"Last week red — buy more, last week green — buy less."</p>
+<p>Same idea as WoW-linear but with fixed dollar amounts: $500 / $300 / $200 depending on the sign. Loses on long trends (doesn't ride growth), wins on chop.</p></article><article id="q-below-200wma" class="faq-item"><h3><a href="#q-below-200wma" class="faq-anchor">Below-200WMA only — what is it?</a></h3><p>Same as Below-SMA200, but the threshold is the <strong>weighted</strong> 200-week moving average (200WMA). A strong "BTC is cheap" indicator — historically BTC rarely spends time below its 200WMA, and those periods coincide with the best buying opportunities.</p>
+<p>The strategy accumulates cash for a long time, then pours it into BTC at once when the price drops below 200WMA. Visually clear on the chart that this happens rarely (once every 2-4 years).</p></article><article id="q-halving-cycle" class="faq-item"><h3><a href="#q-halving-cycle" class="faq-anchor">Halving cycle aware — what is it?</a></h3><p>BTC halving — an event every ~4 years when miner reward is cut in half. Historically tied to the price cycle: post-halving comes a bull run (~12-18 months), then top, then bear, then recovery before the next halving.</p>
+<p>The strategy varies buy size based on months since the last halving:</p>
+<ul>
+<li>0-6 months: 1× (early, accumulate)</li>
+<li>6-18 months: 1.5× (bull start)</li>
+<li>18-30 months: 0.5× (top zone, careful)</li>
+<li>30-48 months: 2× (bear, cheap prices)</li>
+</ul></article><article id="q-pi-cycle" class="faq-item"><h3><a href="#q-pi-cycle" class="faq-anchor">Pi Cycle Top avoidance — what is it?</a></h3><p>Pi Cycle Top — an indicator that historically very accurately called BTC tops: when the 111-day MA crosses above the 350-day MA × 2, BTC is usually near the cycle top.</p>
+<p>Strategy: while no signal, runs as pure DCA. When the signal fires — pause for 4 weeks (don't buy). Defends against buying right at the peak.</p>
+<p>On BTC stress_b over 9 years the signal triggered 2-3 times, and each time really was right before a correction.</p></article><article id="q-mvrv-nupl-mayer" class="faq-item"><h3><a href="#q-mvrv-nupl-mayer" class="faq-anchor">MVRV / NUPL / Mayer Multiple — what are they?</a></h3><p>All three are <strong>on-chain metrics</strong> for crypto, computed from blockchain data.</p>
+<ul>
+<li><strong>MVRV Z-Score</strong>: how overvalued BTC is vs "fair" price. Z &lt; 0 → capitulation, Z &gt; 7 → bubble.</li>
+<li><strong>NUPL</strong>: share of holders in profit. NUPL ≥ 0.75 → euphoria (top), NUPL &lt; 0 → panic (bottom).</li>
+<li><strong>Mayer Multiple</strong>: price / 200-day MA. MM &lt; 0.8 → "cheap", MM &gt; 2.4 → "expensive".</li>
+</ul>
+<p>All three are used as multipliers: the "cheaper" the indicator, the bigger the buy. BTC and ETH only.</p></article><article id="q-200wma-heatmap" class="faq-item"><h3><a href="#q-200wma-heatmap" class="faq-anchor">200WMA Heatmap — what is it?</a></h3><p>Like Mayer Multiple but using the 200-<em>week</em> weighted moving average. Bitcoin Investor Tool on popular sites paints this as a heatmap.</p>
+<p>r = price / 200WMA. r &lt; 1 → 3× (cheap), 1.0-1.5 → 2×, 1.5-3.0 → 1×, 3.0-5.0 → 0.5× (expensive), &gt; 5.0 → 0× (bubble, no buys).</p></article><article id="q-eth-btc-merge" class="faq-item"><h3><a href="#q-eth-btc-merge" class="faq-anchor">ETH/BTC ratio / Merge regime — what are they?</a></h3><p><strong>ETH/BTC ratio gated</strong> (ETH only): buy more ETH when it's cheap relative to BTC. Compares ETH/BTC ratio to its 200-week median.</p>
+<p><strong>Merge regime</strong> (ETH only): a separate calibration before and after The Merge (Sep 15, 2022, ETH transition to Proof-of-Stake). Pre-Merge and post-Merge are different market regimes with different Mayer thresholds.</p></article><article id="q-vix-cape-yield" class="faq-item"><h3><a href="#q-vix-cape-yield" class="faq-anchor">VIX / CAPE / Yield curve — what are they?</a></h3><p>All three are macro indicators for stocks.</p>
+<ul>
+<li><strong>VIX-gated</strong>: VIX (volatility index) → market panic. High VIX → more buying (fear = opportunity). VIX &lt; 15 → calm → 0.4×; VIX &gt; 40 → panic → 2×.</li>
+<li><strong>CAPE-gated</strong>: Shiller CAPE = "P/E over 10 years". CAPE &lt; 15 → cheap (like 2009), &gt; 45 → bubble (like dotcom 2000). Multipliers 1.6× / 1.0× / 0.8× / 0.4× / 0.2×.</li>
+<li><strong>Yield curve aware</strong>: yield curve inversion (10y &lt; 2y) historically predicts recessions 12-18 months out. The strategy is cautious during inversion but actively buys during the 18 months after (market usually cheap).</li>
+</ul></article></section><section id="sec-methodology" class="faq-section"><h2>Methodology</h2><article id="q-data-sources" class="faq-item"><h3><a href="#q-data-sources" class="faq-anchor">Where does the data come from?</a></h3><p>Prices: <strong>CoinMetrics</strong> for BTC and ETH (open source, daily data since 2010). <strong>Yahoo Finance</strong> for S&amp;P 500 (since 1957) and NASDAQ-100 (since 1985).</p>
+<p>On-chain metrics: also CoinMetrics (MVRV Z-Score, NUPL).</p>
+<p>Macro: <strong>FRED</strong> (Federal Reserve) for VIX, T10Y2Y. <strong>multpl.com</strong> for Shiller CAPE.</p>
+<p>All data is public and free.</p></article><article id="q-snapshot-date" class="faq-item"><h3><a href="#q-snapshot-date" class="faq-anchor">What does snapshot date 2026-04-24 mean?</a></h3><p>The last date through which data is loaded. All backtests end here. If the snapshot is "stale" — that's normal, all numbers on the page correspond to this moment.</p>
+<p>To update, you have to re-pull data and recompute the matrix. A one-shot manual operation, not automatic.</p></article><article id="q-test-period" class="faq-item"><h3><a href="#q-test-period" class="faq-anchor">What&#x27;s the test period?</a></h3><p>Depends on the market:</p>
+<ul>
+<li><strong>BTC</strong>: stress_b period — from 2017-01-01 to 2026-04-24, ~9.3 years. Covers 2 full halving cycles.</li>
+<li><strong>ETH</strong>: from 2018-01-13 (after the dotcom-style ICO crash of 2017) to 2026-04-24, ~8.3 years.</li>
+<li><strong>SPY</strong>: from 1999-03-10 to 2026-04-24, ~27 years. Includes dotcom, GFC 2008, COVID, 2022.</li>
+<li><strong>NDX</strong>: from 1999-03-10 to 2026-04-24, ~27 years.</li>
+</ul></article><article id="q-irr-calculation" class="faq-item"><h3><a href="#q-irr-calculation" class="faq-anchor">How is IRR computed?</a></h3><p>Newton's method: solve for the rate <em>r</em> such that the sum of all cashflows (negative deposits, positive terminal value) gives NPV = 0.</p>
+<p>Computed at weekly frequency, then raised to the 52nd power for the annual equivalent: IRR_annual = (1 + r_weekly)<sup>52</sup> − 1.</p></article><article id="q-trust-backtest" class="faq-item"><h3><a href="#q-trust-backtest" class="faq-anchor">Can a backtest like this be trusted?</a></h3><p>With caveats — yes. What's honest about it:</p>
+<ul>
+<li>Only information available at the moment of decision is used (no look-ahead bias)</li>
+<li>Same engine and logic as in the bot — no ad-hoc optimizations against historical data</li>
+<li>Metrics computed standardly (Newton IRR, MaxDD from peak as published)</li>
+<li>Conservation invariant: deposits = spent + idle cash + forgone</li>
+</ul>
+<p>What's NOT included: broker fees (typically 0.1-1%), spread (real for crypto), taxes, slippage on large volumes. This will reduce real returns by 1-3% annually. Not a catastrophe, but be aware.</p></article><article id="q-data-snooping" class="faq-item"><h3><a href="#q-data-snooping" class="faq-anchor">Maybe these strategies were picked by hindsight?</a></h3><p>Good question. <strong>Data snooping</strong> — when you test 1,000 strategies, pick top-3 and say "these are great". In reality it's just noise.</p>
+<p>Here, 25 strategies were taken from public ideas (classic DCA, Mayer Multiple, Pi Cycle, MVRV — all from textbooks and crypto blogs). No one calibrated parameters against the current history. Multipliers and thresholds are mostly "round numbers from the spec".</p>
+<p>Even so — out-of-sample testing on the next 9 years would show different numbers. Past does NOT predict the future. This is a "what if" study, not a "what will be" forecast.</p></article></section><section id="sec-practice" class="faq-section"><h2>Practice</h2><article id="q-financial-advice" class="faq-item"><h3><a href="#q-financial-advice" class="faq-anchor">Is this financial advice?</a></h3><p><strong>No.</strong> This is a research project.</p>
+<p>I'm not a licensed financial advisor, don't know your circumstances, and bear no responsibility for your decisions. Make your own conclusions. If you plan to invest meaningful money — talk to a real advisor.</p></article><article id="q-how-to-choose" class="faq-item"><h3><a href="#q-how-to-choose" class="faq-anchor">How to choose from 25 strategies?</a></h3><p>Steps:</p>
+<ol>
+<li>Set your risk: what max drawdown can you emotionally tolerate? If 30% is your ceiling, ignore strategies with MaxDD &gt; 30%.</li>
+<li>From the remainder, take top-3 by MM (primary metric).</li>
+<li>Read each one's description. If you don't understand what the strategy does — don't pick it.</li>
+<li>Among finalists, choose the one whose description you can explain to a friend in 30 seconds. Complex strategies don't survive contact with reality.</li>
+</ol>
+<p>The site has a "Pick by personality" interactive filter that narrows the choice with 4-5 simple questions.</p></article><article id="q-what-period" class="faq-item"><h3><a href="#q-what-period" class="faq-anchor">What&#x27;s a meaningful DCA timeframe?</a></h3><p>Minimum: 6-12 months. Less is no longer DCA, it's market-timing in small steps.</p>
+<p>Sweet spot: 2-4 years. On crypto you should at least see one halving cycle. On stocks — survive at least one recession.</p>
+<p>If you want long-term: 5-10+ years. Then strategy choice matters less — period length eats the difference between "smart" and "dumb".</p></article><article id="q-real-vs-backtest" class="faq-item"><h3><a href="#q-real-vs-backtest" class="faq-anchor">What separates real DCA from a simulation?</a></h3><p>Main difference: <strong>discipline</strong>. In a backtest the strategy buys every Friday no matter what. In real life you'll skip a Friday because of work, forget, or be too scared to buy during a crash.</p>
+<p>Second: <strong>fees and slippage</strong>. Each trade loses 0.1-1%, over the long run that eats 1-3% of annual return.</p>
+<p>Third: <strong>taxes</strong>. In most countries selling crypto or stocks is taxable. The backtest computes gross, reality is net.</p></article><article id="q-what-if-confused" class="faq-item"><h3><a href="#q-what-if-confused" class="faq-anchor">I don&#x27;t get any of this. What do I do?</a></h3><p>If this is your first DCA — pick <strong>B1 (Pure DCA weekly)</strong> or <strong>B2 (Monthly lump)</strong>. Just buy a fixed amount on a regular schedule. Don't try to wrap your head around MVRV or Pi Cycle on day one.</p>
+<p>"Smart" strategies only work if you understand WHY they're smart. Otherwise you'll miss a signal, fail to react to a drawdown, break everything.</p>
+<p>B1 on BTC over 9 years yielded MM ~ 8.5×. Not perfect (B3 lump was 87×), but honest and without emotional swings.</p></article></section>
+  <div class="faq-footer">Past performance doesn&#x27;t predict the future. This is a research project, not financial advice.</div>
+</div>
+</body>
+</html>

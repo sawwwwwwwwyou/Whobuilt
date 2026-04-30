@@ -3067,10 +3067,8 @@ table.summary {
 .dca-welcome__card {
   background: #ffffff;
   color: #0f172a;
-  max-width: 640px;
+  max-width: 480px;
   width: 100%;
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
   border-radius: 16px;
   padding: 36px 40px 32px;
   box-shadow: 0 24px 64px rgba(15, 23, 42, 0.35);
@@ -3080,82 +3078,63 @@ table.summary {
 }
 .dca-welcome__card h2 {
   font-size: 24px;
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   color: #0f172a;
 }
-.dca-welcome__card h3 {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  color: #475569;
-  margin: 22px 0 8px;
-  font-weight: 600;
-}
 .dca-welcome__card p { margin: 0 0 12px; color: #1e293b; }
-.dca-welcome__card ul { margin: 0 0 14px 0; padding-left: 20px; color: #1e293b; }
-.dca-welcome__card li { margin-bottom: 6px; }
+.dca-welcome__lead { font-size: 16px; color: #0f172a !important; }
 .dca-welcome__card strong { color: #0f172a; }
-.dca-welcome__card em { color: #334155; font-style: italic; }
-.dca-welcome__warning {
-  margin: 18px 0 14px !important;
-  padding: 14px 16px;
-  background: #fef3c7;
-  border-left: 3px solid #f59e0b;
-  border-radius: 4px;
-  font-size: 14px;
-}
 .dca-welcome__disclaimer {
-  margin: 16px 0 22px !important;
+  margin: 18px 0 22px !important;
   font-size: 12px;
   color: #64748b;
   font-style: italic;
 }
-.dca-welcome__close {
+.dca-welcome__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.dca-welcome__primary,
+.dca-welcome__secondary {
   display: inline-block;
   padding: 11px 22px;
-  background: #0f172a;
-  color: #f8fafc;
-  border: none;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
-  transition: background 0.12s;
+  transition: background 0.12s, color 0.12s;
+  text-decoration: none;
 }
-.dca-welcome__close:hover { background: #1e293b; }
+.dca-welcome__primary {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #0f172a;
+}
+.dca-welcome__primary:hover { background: #1e293b; }
+.dca-welcome__secondary {
+  background: transparent;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+.dca-welcome__secondary:hover { background: #f1f5f9; color: #0f172a; }
 @media (max-width: 600px) {
   .dca-welcome__card { padding: 28px 24px; font-size: 14px; }
   .dca-welcome__card h2 { font-size: 20px; }
+  .dca-welcome__actions { flex-direction: column; align-items: stretch; }
+  .dca-welcome__primary, .dca-welcome__secondary { text-align: center; }
 }
 </style>
 <div class="dca-welcome__card">
-<h2>Привет! Что это вообще такое?</h2>
-
-<h3>DCA — что это</h3>
-<p>DCA = Dollar-Cost Averaging. По-простому: ты покупаешь актив (BTC, акции, что угодно) равными порциями с какой-то периодичностью. Раз в неделю по $100, раз в месяц по $500, иногда — по триггеру («только если упало на 10% от пика»). <strong>Ты не угадываешь рынок, ты усредняешься во времени.</strong></p>
-
-<h3>Зачем именно сейчас</h3>
-<p>В апреле 2026 крипта и акции снова на ATH (all-time-high — самые дорогие в истории). Заходить всем капиталом сразу страшно: упадёт же. Но если разнести покупки по неделям, риск «купил вершину» размывается. Вопрос только в том, <em>как</em> именно DCA-ить.</p>
-
-<h3>Что здесь</h3>
-<p>Я взял <strong>25 разных DCA-стратегий</strong> — от тупого «покупай по $461 каждую пятницу» до «бери в 4× больше, когда BTC просел на 50% от пика» — и прогнал каждую через всю историю BTC, ETH, S&amp;P 500 и NASDAQ. По 4 рынкам × 25 стратегий × 2 каденса = 200 ячеек. Видно, какая стратегия исторически сколько даёт, какая просадка, какой риск.</p>
-
-<h3>Как читать цифры</h3>
-<ul>
-<li><strong>MM (money multiple)</strong> — главное число. Сколько раз умножился <em>весь</em> бюджет за период. Это честный показатель «сделал бы я Х раз свои деньги».</li>
-<li><strong>IRR</strong> — годовая доходность.</li>
-<li><strong>MaxDD</strong> — максимальная просадка эквити-кривой. Сколько раз ты бы морально умер за период.</li>
-<li><strong>Invested</strong> — сколько денег стратегия <em>реально вложила</em>. Если 18% — значит 82% бюджета лежали в кэше.</li>
-</ul>
-
-<p class="dca-welcome__warning">
-<strong>Важно:</strong> если где-то увидишь «рост на купленное» (FPV / invested) — это вторичная метрика. Например Value Averaging показывает 23.5×, но это потому что стратегия вложила всего $41k из $224k бюджета, а $41k удачно выросли. Это <em>эффект маленького знаменателя</em>, не магия. <strong>Ориентируйся на MM</strong>.
-</p>
-
+<h2>Привет!</h2>
+<p class="dca-welcome__lead">Это бэктест <strong>25 DCA-стратегий</strong> на BTC, ETH, S&amp;P 500 и NASDAQ за всю их историю. Видно, какая стратегия сколько исторически даёт и с какой просадкой.</p>
+<p>Если ты не уверен, что такое DCA, что значит «MM» в табличке или зачем смотреть на просадку — открой базу знаний. Там простыми словами разобраны все термины и стратегии.</p>
 <p class="dca-welcome__disclaimer">Прошлое не предсказывает будущее. Это исследовательский проект, не финансовый совет.</p>
-
-<button type="button" class="dca-welcome__close" data-action="dismiss">Понял, поехали</button>
+<div class="dca-welcome__actions">
+  <a class="dca-welcome__primary" href="/dca/faq_ru.html">База знаний</a>
+  <button type="button" class="dca-welcome__secondary" data-action="dismiss">К матрице</button>
+</div>
 </div>
 <script>
 (function () {
