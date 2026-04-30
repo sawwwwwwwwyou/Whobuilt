@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DCA Backtest Matrix — Strategy Explorer</title>
+<script>(function(){try{var p=new URL(location.href).searchParams.get('lang');if(p){localStorage.setItem('dca_lang_pref',p);return;}if(localStorage.getItem('dca_lang_pref'))return;var prefersRu=/^ru\b/.test((navigator.language||'').toLowerCase());var pageIsRu=true;if(prefersRu!==pageIsRu){location.replace('/dca/index.html'+location.hash);}}catch(e){}})();</script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", sans-serif; color: #0f172a; background: #f8fafc; line-height: 1.55; }
@@ -3493,7 +3494,7 @@ html.has-faq-drawer-open body {
           <p>BTC · ETH · SPY · NDX · Данные на 2026-04-24</p>
         </div>
       </div>
-      <div class="lang-switch" aria-label="Language"><a class="lang-btn is-active" href="#"  aria-current="true">RU</a><a class="lang-btn " href="/dca/index.html" onclick="event.preventDefault(); window.location.href='/dca/index.html'+window.location.hash;" aria-current="false">EN</a></div>
+      <div class="lang-switch" aria-label="Language"><a class="lang-btn is-active" href="#"  aria-current="true">RU</a><a class="lang-btn " href="/dca/index.html" onclick="event.preventDefault(); try{localStorage.setItem('dca_lang_pref','en');}catch(e){}; window.location.href='/dca/index.html'+window.location.hash;" aria-current="false">EN</a></div>
       <div class="sidebar-group app-nav">
         <button class="tab-btn" data-tab="overview" onclick="showTab('overview')">Исследование</button><button class="tab-btn" data-tab="chooser" onclick="showTab('chooser')">Подбор</button><button class="tab-btn" data-tab="matrix" onclick="showTab('matrix')">Рейтинги</button><button class="tab-btn" data-tab="rankings-weekly" onclick="showTab('rankings-weekly')">Топ-5</button>
       </div>
