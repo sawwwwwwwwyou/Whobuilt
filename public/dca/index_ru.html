@@ -3152,6 +3152,24 @@ table.summary {
   .dca-welcome__actions { flex-direction: column; align-items: stretch; }
   .dca-welcome__primary, .dca-welcome__secondary { text-align: center; }
 }
+.dca-welcome__suppress {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--welcome-muted, #5f6b7a);
+  cursor: pointer;
+  user-select: none;
+}
+.dca-welcome__suppress input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--welcome-ink, #141922);
+}
+.dca-welcome__suppress:hover { color: var(--welcome-ink, #141922); }
 </style>
 <div class="dca-welcome__card">
 <span class="dca-welcome__eyebrow">DCA Matrix</span>
@@ -3161,28 +3179,35 @@ table.summary {
   <a class="dca-welcome__primary" href="/dca/faq_ru.html" data-faq-open>База знаний</a>
   <button type="button" class="dca-welcome__secondary" data-action="dismiss">К матрице</button>
 </div>
+<label class="dca-welcome__suppress">
+  <input type="checkbox" data-suppress>
+  <span>Больше не показывать</span>
+</label>
 </div>
 <script>
 (function () {
-  var KEY = 'dca_welcome_dismissed_v2';
+  var KEY = 'dca_welcome_suppressed_v3';
   var overlay = document.getElementById('dca-welcome');
   if (!overlay) return;
-  function open() { overlay.classList.add('is-open'); }
-  function close(persist) {
+  var suppressInput = overlay.querySelector('[data-suppress]');
+  function isSuppressed() {
+    try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+  }
+  function setSuppressed() {
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+  function close() {
     overlay.classList.remove('is-open');
-    if (persist) {
-      try { localStorage.setItem(KEY, '1'); } catch (e) {}
-    }
+    if (suppressInput && suppressInput.checked) setSuppressed();
   }
-  if (!(function () { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } })()) {
-    open();
-  }
+  // Show on every load unless permanently suppressed via the checkbox.
+  if (!isSuppressed()) overlay.classList.add('is-open');
   overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) close(true);
-    if (e.target.closest && e.target.closest('[data-action="dismiss"]')) close(true);
+    if (e.target === overlay) close();
+    if (e.target.closest && e.target.closest('[data-action="dismiss"]')) close();
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close(true);
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
   });
 })();
 </script>
